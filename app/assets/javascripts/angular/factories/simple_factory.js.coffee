@@ -11,6 +11,20 @@ App.factory("simpleFactory", ['$http', ($http) ->
   factory.getCustomers = () ->
     customers
 
+  factory.getSearchResults = (query) ->
+    promise = $http({
+      method: 'GET',
+      url: '/searches',
+      params: {query: query}
+    }).success((data) -> 
+      console.log data
+      data
+    )
+    promise
+
+  factory.getEntries = () ->
+    [ { name: "Ed" }, { name: "Jon" }, { name: "Verdi" } ]
+
   factory.createCustomer = (customer) ->
     customers
 

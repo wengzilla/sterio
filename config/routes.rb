@@ -2,6 +2,7 @@ Jukebox::Application.routes.draw do
 
   match 'view1' => 'pages#view1'
   match 'view2' => 'pages#view2'
+  resources :searches, :only => [:index]
   root :to => 'pages#index'
 
   # The priority is based upon order of creation:

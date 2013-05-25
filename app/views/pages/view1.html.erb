@@ -1,16 +1,10 @@
   <h1>View 1</h1>
   <div class="container">
-    Name: <input type="text" ng-model="name" />
+    Query: <input type="text" ng-model="query" />
   </div>
 
   <ul>
-    <li ng-repeat="cust in customers | filter:name | orderBy:'city'">{{cust.name | uppercase}} - {{cust.city}}</li>
+    <li ng-repeat="result in results">{{result.title}}</li>
   </ul>
-
-  <div>
-    <input type="text" ng-model="newCustomer.name" />
-    <input type="text" ng-model="newCustomer.city" />
-    <button ng-click="addCustomer()">Add Customer!</button
-  </div>
 
   <a href="#partial2">View 2</a>

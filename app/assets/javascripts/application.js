@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require app
+//= require underscore
 //= require_tree ./angular/factories/
 //= require_tree ./angular/controllers/
 //= require routes
