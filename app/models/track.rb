@@ -14,6 +14,7 @@ class Track < ActiveRecord::Base
 
   def as_json(*params)
     {
+      "id" => self.id,
       "external_id" => self.external_id,
       "author" => self.external_author,
       "title" => self.title,

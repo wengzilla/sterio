@@ -21,9 +21,9 @@ class Api::V1::TracksController < Api::ApiController
   end
 
   def destroy
-    track = playlist.tracks.find_by_url(params[:external_id])
-    if track and playlist.can_edit?(current_user)
-      render :json => playlist.track_indices.where(:track_id => track.id).delete_all
+    track = playlist.tracks.find(params[:id])
+    if track && track.destroy# and playlist.can_edit?(current_user)
+      render :json => {:tracks => playlist.tracks}
     else
       render :json => false
     end

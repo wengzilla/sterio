@@ -8,5 +8,11 @@ angular.module('directives', [])
         .bind("tap", function (ev) {
            return scope.$apply(attrs['onTap']);
       });
+    }
+  }).directive('stopEvent', function () {
+    return function (scope, element, attr) {
+      element.bind(attr.stopEvent, function (e) {
+          e.stopPropagation();
+      });
     };
   });

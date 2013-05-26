@@ -5,6 +5,7 @@ class Playlist < ActiveRecord::Base
   belongs_to :user
   uniquify :token
 
+  belongs_to :current_track, :class_name => 'Track'
   has_many :tracks, :order => "position"
 
   validates :name, :presence => true, :length => { :maximum => 20 }
@@ -32,6 +33,11 @@ class Playlist < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super().merge(url: Rails.application.routes.url_helpers.playlist_path(token))
+    params = {
+      :url => Rails.application.routes.url_helpers.playlist_path(token),
+      :current_track => current_track,
+      :tracks => tracks
+    }
+    super().merge(params)
   end
 end

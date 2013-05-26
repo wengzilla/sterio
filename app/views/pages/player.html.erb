@@ -2,18 +2,52 @@
 
   <div class="video-list flush">
     <ul>
-      <li ng-repeat="result in results" on-tap="createTrack('{{result.external_id}}')">
-        <a class="swipe" onclick="false">
-          <span>
-            <span class="crop">
-              <img ng-src="{{result.thumbnail_url}}">
-            </p>
-            <div class="duration">{{result.duration | time}}</div>
-          </span>
-          <h3>{{result.title | truncate}}</h3>
-          <p class="title">{{result.author}}</p>
-          <p class="title"><span class="rating">{{result.rating}}%</span> {{result.view_count}} views</p>
-        </a>
+      <li ng-repeat="track in tracks" ng-click="playVideo(track)">
+        <span>
+          <span class="crop">
+            <img ng-src="{{track.thumbnail_url}}">
+          </p>
+          <div class="duration">{{track.duration | time}}</div>
+        </span>
+        <div class="video-info">
+          <h3>{{track.title | truncate}}</h3>
+          <p class="title">{{track.author}}</p>
+          <p class="title"><span class="rating">{{track.rating}}%</span> {{track.view_count}} views</p>
+          <div class="video-close">
+            <button ng-click="removeTrack(track, $event)" stop-event="click">×</button>
+          </div>
+        </div>
       </li>
     </ul>
   </div>
+
+<style>
+  
+</style>
+
+<!-- 
+
+  <div id="ytplayer"></div>
+
+  <div class="video-list flush">
+    <ul>
+      <li ng-repeat="track in tracks" ng-click="playVideo(track)">
+        <span>
+          <span class="crop">
+            <img ng-src="{{track.thumbnail_url}}">
+          </p>
+          <div class="duration">{{track.duration | time}}</div>
+        </span>
+        <div class="video-info">
+          <h3>{{track.title | truncate}}</h3>
+          <p class="title">{{track.author}}</p>
+          <p class="title"><span class="rating">{{track.rating}}%</span> {{track.view_count}} views</p>
+          <div class="video-close">
+            <button ng-click="removeTrack(track, $event)" stop-event="click">×</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+-->

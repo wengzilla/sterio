@@ -1,7 +1,7 @@
 class window.YouTube
   constructor: ->
     @_addScriptTags()
-    $(window).bind("videoReady", (e, p) => @_wireup(p))
+    $(window).bind("playerReady", (e, p) => @_wireup(p))
     $(window).bind("videoStateChange", (e, p) => @_stateChange(p))
     $(window).bind("playVideo", (e, t) => @_playVideo(t))
 
@@ -13,37 +13,36 @@ class window.YouTube
 
   _wireup: (p) ->
     @video_player = p
-    @_logActions()
-    $(window).bind("videoGetCurrentTime", @_getCurrentTime)
-
-  _logActions: =>
-    # setInterval(@_getCurrentTime, 1000)
-    
-  _getCurrentTime: =>
-    $(window).trigger("videoCurrentTime", @video_player.getCurrentTime())
+    $(window).trigger("videoReady")
 
   _stateChange: (e) =>
     if e.data is YT.PlayerState.ENDED
-      console.log("ENDED")
+      $(window).trigger("playerStateChange", "ENDED")
     if e.data is YT.PlayerState.PLAYING 
-      console.log("PLAYING")
+      $(window).trigger("playerStateChange", "PLAYING")
     if e.data is YT.PlayerState.PAUSED
-      console.log("PAUSED")
+      $(window).trigger("playerStateChange", "PAUSED")
     if e.data is YT.PlayerState.BUFFERING
-      console.log("BUFFERING")
+      $(window).trigger("playerStateChange", "BUFFERING")
     if e.data is YT.PlayerState.CUED
-      console.log("CUED")
+      $(window).trigger("playerStateChange", "CUED")
 
   _playVideo: (t) =>
-    @video_player.loadVideoById(t)
+    if t? then @video_player.loadVideoById(t)
     @video_player.playVideo()
 
   window.onYouTubeIframeAPIReady = =>
-    console.log("HI")
-    console.log $('#video_info').data('url')
     player = new YT.Player('ytplayer', {
       height: '295',
       width: '480',
+      playerVars: {
+        'origin': 'http://localhost:1999',
+        'modestbranding': 1,
+        'rel': 0,
+        'enablejsapi': 1,
+        'color': 'white',
+        'autohide': 1
+      },
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
@@ -52,7 +51,10 @@ class window.YouTube
 
   onPlayerReady = (event) ->
     player = event.target
-    $(window).trigger("videoReady", player)
+    $(window).trigger("playerReady", player)
 
   onPlayerStateChange = (e) =>
     $(window).trigger("videoStateChange", e)
+
+  videoPlayer = =>
+    @video_player

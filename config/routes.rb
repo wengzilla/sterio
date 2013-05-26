@@ -4,6 +4,7 @@ Jukebox::Application.routes.draw do
     namespace :v1 do
       resources :searches, :only => [:index]
       resources :tracks, :only => [:index, :create, :destroy]
+      resources :playlists, :only => [:show]
     end
   end
 

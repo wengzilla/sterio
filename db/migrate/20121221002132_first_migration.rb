@@ -9,13 +9,13 @@ class FirstMigration < ActiveRecord::Migration
       t.boolean  "shared",             :default => false
       t.boolean  "active",             :default => true
       t.string   "token"
+      t.integer  "current_track_id"
       t.datetime "created_at",                            :null => false
       t.datetime "updated_at",                            :null => false
     end
 
     create_table "tracks", :force => true do |t|
       t.integer  "playlist_id"
-      t.integer  "track_id"
       t.integer  "position",    :default => 0
       t.integer  "user_id"
       t.string   "external_source"
