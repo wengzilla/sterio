@@ -1,6 +1,6 @@
 class FirstMigration < ActiveRecord::Migration
   def change
-    create_table "rooms", :force => true do |t|
+    create_table "playlists", :force => true do |t|
       t.string   "name"
       t.string   "description"
       t.integer  "view_count",         :default => 0
@@ -13,16 +13,11 @@ class FirstMigration < ActiveRecord::Migration
       t.datetime "updated_at",                            :null => false
     end
 
-    create_table "track_indices", :force => true do |t|
+    create_table "tracks", :force => true do |t|
       t.integer  "playlist_id"
       t.integer  "track_id"
       t.integer  "position",    :default => 0
       t.integer  "user_id"
-      t.datetime "created_at",                 :null => false
-      t.datetime "updated_at",                 :null => false
-    end
-
-    create_table "tracks", :force => true do |t|
       t.string   "external_source"
       t.string   "external_id"
       t.string   "external_author"
@@ -32,6 +27,8 @@ class FirstMigration < ActiveRecord::Migration
       t.integer  "play_count"
       t.integer  "duration"
       t.string   "url"
+      t.integer  "rating"
+      t.integer  "view_count"
       t.datetime "created_at",      :null => false
       t.datetime "updated_at",      :null => false
     end

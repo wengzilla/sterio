@@ -1,7 +1,15 @@
 Jukebox::Application.routes.draw do
 
-  match 'view1' => 'pages#view1'
-  match 'view2' => 'pages#view2'
+  namespace :api do
+    namespace :v1 do
+      resources :searches, :only => [:index]
+      resources :tracks, :only => [:index, :create, :destroy]
+    end
+  end
+
+  match 'search' => 'pages#search'
+  match 'playlist' => 'pages#playlist'
+  match 'player' => 'pages#player'
   resources :searches, :only => [:index]
   root :to => 'pages#index'
 

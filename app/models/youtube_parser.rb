@@ -25,16 +25,18 @@ class YoutubeParser
   private
 
   def self.encode(video)
-    data = {
-      'duration' => video.duration,
-      'external_source' => YoutubeParser.source,
-      'external_author' => video.author.name,
-      'external_id' => video.unique_id,
-      'image' => video.thumbnails.first.url,
-      'title' => video.title,
-      'data' => video.to_json,
-      'url' => "https://www.youtube.com/v/#{video.unique_id}"
-    }
+    data = Hash.new.tap do |hash|
+      hash['duration'] = video.duration
+      hash['external_source'] = YoutubeParser.source
+      hash['external_author'] = video.author.name
+      hash['external_id'] = video.unique_id
+      hash['image'] = video.thumbnails.first.url
+      hash['title'] = video.title
+      hash['data'] = video.to_json
+      hash['url'] = "https://www.youtube.com/v/#{video.unique_id}"
+      hash['view_count'] = video.view_count
+      hash['rating'] = (video.rating.average / video.rating.max * 100).round if video.rating
+    end
 
     track = Track.new(data)
   end

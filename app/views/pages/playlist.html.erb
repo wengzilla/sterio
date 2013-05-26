@@ -1,0 +1,17 @@
+  <div class="video-list flush">
+    <ul>
+      <li ng-repeat="result in results" on-tap="createTrack('{{result.external_id}}')">
+        <a class="swipe" onclick="false">
+          <span>
+            <span class="crop">
+              <img ng-src="{{result.thumbnail_url}}">
+            </p>
+            <div class="duration">{{result.duration | time}}</div>
+          </span>
+          <h3>{{result.title | truncate}}</h3>
+          <p class="title">{{result.author}}</p>
+          <p class="title"><span class="rating">{{result.rating}}%</span> {{result.view_count}} views</p>
+        </a>
+      </li>
+    </ul>
+  </div>

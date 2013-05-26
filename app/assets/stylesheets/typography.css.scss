@@ -1,0 +1,302 @@
+@import "compass";
+@import "bourbon";
+@import "mobile-global-vars";
+
+//  --------------------------------------------------------------------------------
+//  In your font-face!
+//  --------------------------------------------------------------------------------
+
+@font-face {
+  font-family: 'Raleway', 'Helvetica', 'Arial', sans-serif;
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Raleway', 'Helvetica', 'Arial', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+//  ----------------------------------------------------------------------------
+//  High Command
+//  --------------------------------------------------------------------------------
+
+body {
+  background-color: $body_bg_color;
+  color: $body_copy_color;
+  font-family: $body_fonts_primary;
+  font-size: $body_copy_size_reg;
+  font-weight: normal;
+  line-height: $body_copy_height_reg;
+  margin: 0;
+  padding: 0;
+}
+
+body.fixed-button {
+  padding-bottom: 110px;
+}
+
+//  --------------------------------------------------------------------------------
+//  Structure
+//  --------------------------------------------------------------------------------
+
+
+
+
+//  Mobile width viewport setup
+// .container            { min-width: 320px; max-width: 640px; margin: 0 auto; }
+.buffer {
+  padding: 0 $side_buffer 12px;
+  overflow: hidden;
+  height: 1%;
+}
+
+.buffer-gap-top {
+  padding-top:25px;
+}
+
+.has_buffer {
+  margin: $side_buffer;
+}
+
+//  Pages with fixed bottom button –– add spacing at bottom of page to ensure button doesn't cover any content
+//  Apply this to <body> or any container that wraps EVERYTHING on the page.
+.has_bottom_fixed_button {
+  padding-bottom: 95px;
+}
+
+//  DUAL COLUMNS –– if you need columsn of content split evenly
+.dual_columns {
+  @include clearfix;
+}
+
+.dual_columns .col {
+  margin: 0;
+  padding: 0;
+  width: 50%;
+  float: left;
+  list-style: none;
+  display: table-cell;
+}
+
+.dual_columns .col_left > .inner {
+  margin-right: 8px;
+}
+
+.dual_columns .col_right > .inner {
+  margin-left: 8px;
+}
+
+//  --------------------------------------------------------------------------------
+//  General Typography
+//  --------------------------------------------------------------------------------
+
+//  Headers –– Universal
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: $body_fonts_primary;
+  font-weight: bold;
+  padding: 0;
+  margin: 0 0 0.5em 0;
+  nowhitespace: afterproperty;
+  color: $body_copy_dark;
+}
+
+//  Headers –– Basic Variety
+h1 {
+  font-size: 28px;
+  line-height: 35px;
+  margin: $top_buffer 0;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 28px;
+  margin: $top_buffer 0;
+}
+
+h3 {
+  font-size: 16px;
+  margin: 1em 0;
+}
+
+h4 {
+  font-size: 14px;
+  margin: 1em 0;
+}
+
+h5 {
+  font-size: 14px;
+  margin: 1em 0;
+}
+
+h6 {
+  font-size: 14px;
+  margin: 1em 0;
+}
+
+//  Headers –– Full "Row" Variety
+h1.row {
+  font-size: 19px;
+  line-height: 50px;
+  height: 46px;
+  overflow: hidden;
+  color: #fff;
+  background: $body_copy_dark;
+  padding: 0 $side_buffer;
+  margin: 0;
+  text-transform: none;
+  text-align: center;
+}
+
+h2.row {
+  font-size: 16px;
+  line-height: 19px;
+  color: $body_copy_dark;
+  background: #d3d3d3;
+  padding: 12px $side_buffer 8px;
+  margin: 0 0 0 0;
+  position: relative;
+}
+
+h2.row .side_label {
+  position: absolute;
+  right: $side_buffer;
+  color: $copy_light_on_grey;
+  font-size: $body_copy_size_small;
+  line-height: 19px;
+}
+
+.buffer h2.row {
+  margin-left: -$side_buffer;
+  margin-right: -$side_buffer;
+}
+
+//  Alternate Varieties
+h1.alt {
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  color: $clementine;
+}
+
+h1.jumbo {
+  font-size: 50px;
+  line-height: 57px;
+  text-align: center;
+  margin: 15px 0 21px;
+}
+
+//  Generic Lists
+ul, ol, dl {
+  margin: 1em 0;
+  padding: 0;
+}
+
+ul li,
+ol li {
+  margin: 0 0 0 32px;
+}
+
+dl dt {
+  font-weight: bold;
+  margin: 8px 0 0 0;
+}
+
+dl dd {
+  margin: 0 0 8px 0;
+  margin: 0 0 0 32px;
+  list-style: disc;
+  display: list-item;
+}
+
+//  Misc HTML Elements
+p {
+  padding: 0;
+  margin: 1em 0;
+}
+
+p.alt {
+  color: $body_copy_light;
+  font-size: $body_copy_size_small;
+  line-height: $body_copy_height_small;
+}
+
+p.notice {
+  background: #FFFCDF;
+  margin: 12px 0 15px;
+  padding: 14px 15px 12px;
+  font-weight: bold;
+}
+
+p.notice strong {
+  color: $clementine;
+}
+
+a {
+  color: $link_color;
+  text-decoration: none;
+}
+
+em {
+  font-style: normal;
+}
+
+hr {
+  height: 1px;
+  border: none;
+  background: $list_border_color;
+  margin: 0;
+}
+
+.link {
+  color: $link_color;
+}
+
+.block {
+  display: block;
+}
+
+code {
+  color: $spice;
+  font-size: 90%;
+  background: #ffffee;
+  font-weight: bold;
+}
+
+.code-sample {
+  background: #ffffee;
+  margin: 1em 0;
+  white-space: pre;
+  color: $spice;
+  font-size: 90%;
+  font-family: $body_fonts_mono;
+  font-weight: bold;
+  border: 1px solid #ddddaa;
+  @include border-radius(4px);
+}
+
+.code-sample em {
+  color: $slushie;
+}
+
+//  Universal Variables
+.align_center {
+  text-align: center;
+}
+
+.align_right {
+  text-align: right;
+}
+
+.color_clementine {
+  color: $clementine;
+}
+
+.success {
+  color: $wasabi;
+}

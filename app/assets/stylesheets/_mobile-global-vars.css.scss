@@ -1,0 +1,85 @@
+// ------------------------------------------------------------
+//    Brand Colors
+// ------------------------------------------------------------
+
+$slate: #dfdfdf;
+
+$honeycomb: #e9ba26;
+$clementine: #f0812b;
+$slushie: #5fb8dd;
+$frosting: #ea0b86;
+
+$aloe: #50886b;
+$berry: #508395;
+$wasabi: #9eae3d;
+$grape: #92278f;
+$spice: #eb3f3c;
+$wine: #832e2f;
+$whale: #262626;
+$white: white;
+
+//Nathan's blue he is using in mobile
+$blue: rgb(8, 153, 188);
+
+//background colors
+$gray-10: #e6e6e6;
+$gray-30: #d1d1d1;
+$gray-50: #909090;
+$gray-70: #666666;
+$gray-90: #454545;
+$gray-100: #262626;
+
+// ------------------------------------------------------------
+//    Typography: Color
+// ------------------------------------------------------------
+
+$link_color: #0088cc;
+$body_copy_dark: #333333;
+$body_copy_color: #555555;
+$body_copy_light: #888888;
+$body_copy_disabled: #aaaaaa;
+
+// For things like "choose up to 2" side label on grey header
+$copy_light_on_grey: #999999;
+
+// Form selected items get a faded nacho cheese color
+$active_form_row_color: rgba(232, 186, 35, 0.1);
+$unavailable_form_row_color: #aaaaaa;
+
+// ------------------------------------------------------------
+//    Typography: font-family, font-size & line-height
+// ------------------------------------------------------------
+
+$body_copy_size_large: 19px;
+$body_copy_size_bigger: 16px;
+$body_copy_size_reg: 14px;
+$body_copy_size_small: 13px;
+
+$body_copy_height_reg: 135%;
+$body_copy_height_small: 125%;
+$body_fonts_primary: Open Sans, Helvetica Neue, Arial, sans-serif;
+$body_fonts_secondary: Geogia, Serif;
+$body_fonts_mono: monospace, "Courier New";
+
+// ------------------------------------------------------------
+//    Misc. Sizes and Colors
+// ------------------------------------------------------------
+
+$side_buffer: 12px;
+$top_buffer: 12px;
+$body_bg_color: #1B1B1B;
+$list_border_color: #18191B;
+
+// ------------------------------------------------------------
+//    Rotate Mixin
+// ------------------------------------------------------------
+
+// Rotate Mixin
+@mixin rotate($degrees) {
+  -moz-transform: rotate($degrees);
+  -o-transform: rotate($degrees);
+  -webkit-transform: rotate($degrees);
+  filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+  zoom: 1;
+}

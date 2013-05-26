@@ -21,11 +21,12 @@ end
 gem 'pubnub'
 
 # styling
+gem 'sass'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'compass-rails'
 gem 'jquery-ui-rails'
-gem 'twitter-bootstrap-rails'
 gem 'jquery-rails'
+gem 'bourbon'
 
 # authentication
 gem 'sorcery', '~> 0.7.13'
@@ -40,3 +41,6 @@ gem 'awesome_print'
 
 # Search optimization help
 gem 'spiderable'
+
+# tokens
+gem 'uniquify'
