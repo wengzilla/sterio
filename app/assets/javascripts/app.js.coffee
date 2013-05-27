@@ -29,3 +29,9 @@ angular.module('filters', [])
         String(text).substring(0, length - end.length) + end
 
 window.App = angular.module('playerApp', ['filters', 'directives'])
+
+window.onload = ->
+  console.log "Test"
+  setTimeout (->
+    window.scrollTo 0, 1
+  ), 100

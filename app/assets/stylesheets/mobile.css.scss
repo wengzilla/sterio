@@ -22,37 +22,14 @@ GLOBAL HEADER - global
 }
 
 .site-header .brand {
-  padding-top: 23px;
+  padding-top: 10px;
   padding-left: 10px;
-  height: 40px;
+  height: 20px;
   display: block;
   font-family: 'Raleway';
   font-size: 30px;
   font-weight: 100;
   color: white;
-}
-
-.site-header nav {
-  position: absolute;
-  right: 10px;
-  top: 18px;
-}
-
-.site-header nav a {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  text-indent: -9999px;
-  background-size:24px 24px !important;
-}
-
-.site-header nav .vouchers {
-  background: image-url("nav-icons/vouchers@2x.png") no-repeat center center;
-  margin-right: 0.5em;
-}
-
-.site-header nav .settings {
-  background: image-url("nav-icons/settings@2x.png") no-repeat center center;
 }
 
 /* Menu Button - Can trim specificity when old button is removed 

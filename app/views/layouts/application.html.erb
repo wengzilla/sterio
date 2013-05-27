@@ -2,18 +2,22 @@
 <html ng-app="playerApp">
 <head>
   <title>ster.io</title>
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
-  <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" %>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" %>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
   <script src="http://cdn.pubnub.com/pubnub-3.5.0.min.js" ></script>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body window-scroll>
 
 <%= render :partial => "layouts/navbar" %>
 
