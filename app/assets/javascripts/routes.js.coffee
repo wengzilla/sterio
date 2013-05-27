@@ -1,4 +1,4 @@
-App.config(($routeProvider) -> 
+App.config(['$routeProvider', ($routeProvider) -> 
   $routeProvider
     .when('/search',
     {
@@ -16,4 +16,4 @@ App.config(($routeProvider) ->
       templateUrl: 'player'
     })
     .otherwise({ redirectTo: '/search' })
-)
+])

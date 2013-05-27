@@ -1,4 +1,4 @@
-App.controller "PlayersController", ['$scope', 'playlistsFactory', 'tracksFactory', ($scope, playlistsFactory, tracksFactory) ->
+App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactory', ($scope, playlistsFactory, tracksFactory) ->
   $scope.playlist = 1
   $scope.repeat = 0
   $scope.playerState = ""
@@ -70,4 +70,4 @@ App.controller "PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
     $scope.currentTrack = videos[index]
 
   yt = new YouTube
-]
+])
