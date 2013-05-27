@@ -27,6 +27,7 @@ gem 'compass-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-rails'
 gem 'bourbon'
+gem 'font-awesome-rails'
 
 # authentication
 gem 'sorcery', '~> 0.7.13'

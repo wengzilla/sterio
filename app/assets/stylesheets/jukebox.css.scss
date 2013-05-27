@@ -25,6 +25,35 @@ LIST PAGES
   word-wrap: break-word;
 }
 
+.video-list .video-command-bar {
+  width: 100%;
+  font-size: 30px;
+  min-height: 45px;
+  background-color: #111;
+
+  ul {
+    margin: 0px;
+  }
+
+  li {
+    border: 0;
+    border-right: 1px solid #333;
+    border-left: 1px solid #222;
+    min-height: 0px;
+    padding: 0;
+    padding: 8px 32px;
+    float: left;
+    background-color: transparent;
+  }
+
+  li:first-child {
+    border-left: 0;
+  }
+  li:last-child {
+    border-right: 0;
+  }
+}
+
 .video-list ul li a {
   display: block;
   min-height: 55px;
@@ -168,7 +197,7 @@ LIST PAGES
   .player {
     .player-wrapper {
       position: absolute;
-      top: 68px;
+      top: 50px;
       bottom: 0;
       right: 0;
       left: 0;
