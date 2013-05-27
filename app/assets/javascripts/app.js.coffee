@@ -28,6 +28,4 @@ angular.module('filters', [])
       else
         String(text).substring(0, length - end.length) + end
 
-
-
 window.App = angular.module('playerApp', ['filters', 'directives'])

@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require app
 //= require hammer.min
 //= require jquery.hammer.min
 //= require underscore
+//= require app
 //= require_tree ./angular/factories/
 //= require_tree ./angular/controllers/
 //= require routes
