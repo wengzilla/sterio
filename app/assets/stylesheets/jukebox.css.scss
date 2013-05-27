@@ -21,28 +21,43 @@ LIST PAGES
   margin: 0;
   border-top: 1px solid #29272D;
   border-bottom: 1px solid $list_border_color;
-  background: $whale image-url("menus/arrow.png") no-repeat center right;
+  background: $whale;
   word-wrap: break-word;
 }
 
-.video-list .video-command-bar {
+.video-list ul li.current-track {
+  background: #111;
+}
+
+.right-col .video-command-bar {
   width: 100%;
   font-size: 30px;
   min-height: 45px;
   background-color: #111;
+  text-align: center;
 
   ul {
+    list-style: none !important;
+    padding: 0px;
     margin: 0px;
   }
 
+  li:hover {
+    color: #666;
+  }
+
+  li.active {
+    color: #AD61B9;
+  }
+
   li {
+    display: inline-block;
+    margin: 0px;
     border: 0;
     border-right: 1px solid #333;
     border-left: 1px solid #222;
     min-height: 0px;
-    padding: 0;
-    padding: 8px 32px;
-    float: left;
+    padding: 8px 33px;
     background-color: transparent;
   }
 
@@ -194,7 +209,19 @@ LIST PAGES
 
 /* FULL SCREEN */
 @media screen and (min-width : 1024px) {
+  .video-command-bar {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+  }
+
   .player {
+    .video-list {
+      position: absolute;
+      bottom: 0;
+      top: 47px;
+      overflow-y: auto;
+    }
     .player-wrapper {
       position: absolute;
       top: 50px;
@@ -214,14 +241,13 @@ LIST PAGES
       border-right: 1px solid #111;
     }
 
-    .video-list {
+    .right-col {
       border-left: 2px solid #333;
       position: absolute;
       width: 400px;
       right: 0;
       top: 0;
       bottom: 0;
-      overflow-y: scroll;
     }
   }
 }
@@ -235,7 +261,7 @@ LIST PAGES
     min-width:480px;
   }
 
-  .video-list {
+  .right-col {
     position:relative
   }
 }
@@ -248,7 +274,7 @@ LIST PAGES
     min-width:200px;
   }
 
-  .video-list {
+  .right-col {
     position:relative
   }
 

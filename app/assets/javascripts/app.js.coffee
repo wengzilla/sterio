@@ -20,13 +20,16 @@ angular.module('filters', [])
       else if $(window).width() < 1024
         length = 70
       else
-        length = 1000
+        length = 50
 
       end = "..."  if end is `undefined`
       if text.length <= length or text.length - end.length <= length
         text
       else
         String(text).substring(0, length - end.length) + end
+  .filter 'iif', () ->
+     (input, trueValue, falseValue) ->
+        input ? trueValue : falseValue
 
 window.App = angular.module('playerApp', ['filters', 'directives'])
 

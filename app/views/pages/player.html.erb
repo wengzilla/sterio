@@ -3,33 +3,32 @@
     <div class="video-wrapper">
       <div id="ytplayer"></div>
     </div>
-    <div class="video-list flush">
+    <div class="right-col">
       <div class="video-command-bar">
         <ul>
-          <li ng-click="toggleRandom()"><i class="icon-random"></i></li>
-          <li ng-click="showSearch()"><i class="icon-search"></i></li>
-          <li ng-click="showPlaylist()"><i class="icon-list"></i></li>
-          <li ng-click="toggleSync()"><i class="icon-rocket"></i></li>
+          <li ng-class='{"active":shuffle}' ng-click="shuffle = !shuffle"><i class="icon-random"></i></li><li ng-class='{"active":sync}' ng-click="sync = !sync"><i class="icon-rocket"></i></li><li ng-class='{"active":repeat}' ng-click="repeat = !repeat"><i class="icon-refresh"></i></li><li ng-click="showPlaylist = !showPlaylist"><i ng-class='{"icon-list":!showPlaylist, "icon-search":showPlaylist}'></i></li>
         </ul>
       </div>
-      <ul>
-        <li ng-repeat="track in tracks" ng-click="playVideo(track)">
-          <span>
-            <span class="crop">
-              <img ng-src="{{track.thumbnail_url}}">
-            </p>
-            <div class="duration">{{track.duration | time}}</div>
-          </span>
-          <div class="video-info">
-            <h3>{{track.title | truncate}}</h3>
-            <p class="title">{{track.author}}</p>
-            <p class="title"><span class="rating">{{track.rating}}%</span> {{track.view_count}} views</p>
-            <div class="video-close">
-              <button ng-click="removeTrack(track, $event)" stop-event="click">×</button>
+      <div class="video-list flush">
+        <ul>
+          <li ng-repeat="track in tracks" ng-class='{"current-track":currentTrack==track}' ng-click="setCurrentTrack(track)">
+            <span>
+              <span class="crop">
+                <img ng-src="{{track.thumbnail_url}}">
+              </p>
+              <div class="duration">{{track.duration | time}}</div>
+            </span>
+            <div class="video-info">
+              <h3>{{track.title | truncate}}</h3>
+              <p class="title">{{track.author}}</p>
+              <p class="title"><span class="rating">{{track.rating}}%</span> {{track.view_count}} views</p>
+              <div class="video-close">
+                <button ng-click="removeTrack(track, $event)" stop-event="click">×</button>
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
