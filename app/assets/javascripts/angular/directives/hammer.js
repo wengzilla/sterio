@@ -15,4 +15,8 @@ angular.module('directives', [])
           e.stopPropagation();
       });
     };
+  }).directive('collapseOnClick', function() {
+    return function (scope, element, attr) {
+      element.bind('click', function(){ $(this).slideUp("slow") });
+    };
   });

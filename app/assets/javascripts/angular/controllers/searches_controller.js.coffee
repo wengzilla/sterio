@@ -8,8 +8,9 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
 
   init = () ->
 
-  $scope.createTrack = (external_id) ->
-    tracksFactory.createTrack($scope.playlist, external_id)
+  $scope.createTrack = (track) ->
+    console.log("HERE")
+    tracksFactory.createTrack($scope.playlist, track.external_id)
 
   init()
 ])
