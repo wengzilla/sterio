@@ -15,6 +15,7 @@
 //= require hammer.min
 //= require jquery.hammer.min
 //= require underscore
+//= require fastclick
 //= require app
 //= require_tree ./angular/factories/
 //= require_tree ./angular/controllers/

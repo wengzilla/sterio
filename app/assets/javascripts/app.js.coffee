@@ -34,7 +34,4 @@ angular.module('filters', [])
 window.App = angular.module('playerApp', ['filters', 'directives'])
 
 window.onload = ->
-  console.log "Test"
-  setTimeout (->
-    window.scrollTo 0, 1
-  ), 100
+  FastClick.attach(document.body);
