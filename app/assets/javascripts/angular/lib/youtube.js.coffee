@@ -36,7 +36,7 @@ class window.YouTube
       height: '100%',
       width: '100%',
       playerVars: {
-        'origin': 'http://localhost:1999',
+        'origin': 'http://sterio.herokuapp.com',
         'modestbranding': 1,
         'rel': 0,
         'enablejsapi': 1,
