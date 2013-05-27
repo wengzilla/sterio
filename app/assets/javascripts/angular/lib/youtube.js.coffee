@@ -33,15 +33,15 @@ class window.YouTube
 
   window.onYouTubeIframeAPIReady = =>
     player = new YT.Player('ytplayer', {
-      height: '295',
-      width: '480',
+      height: '100%',
+      width: '100%',
       playerVars: {
         'origin': 'http://localhost:1999',
         'modestbranding': 1,
         'rel': 0,
         'enablejsapi': 1,
         'color': 'white',
-        'autohide': 1
+        'autohide': 2
       },
       events: {
         'onReady': onPlayerReady,

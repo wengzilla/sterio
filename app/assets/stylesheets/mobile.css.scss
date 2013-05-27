@@ -12,17 +12,19 @@ GLOBAL HEADER - global
   background: #342138;
   color: #fff;
   position:relative;
-  text-align:center;
+  border-bottom: 5px solid #3A283D;
+  border-top: 5px solid #3A283D;
 }
 
 .site-header .logo {
-  margin: 0 0 0 -2px;
+  margin: 0;
   height: 58px;
 }
 
-.site-header .logo a {
-  padding-top: 10px;
-  height: 58px;
+.site-header .brand {
+  padding-top: 23px;
+  padding-left: 10px;
+  height: 40px;
   display: block;
   font-family: 'Raleway';
   font-size: 30px;
@@ -956,7 +958,6 @@ textarea {
   border: none;
   background: #fff;
   border: 1px solid #ccc;
-  @include border-radius(4px);
   font-weight: bold;
   color: $whale;
   font-size: 16px;
@@ -1035,7 +1036,6 @@ form.ls-form ul li input[type="number"],
 form.ls-form ul li input[type="password"] {
   margin: 0;
   border: 1px solid #cccccc;
-  border-radius: 4px;
 }
 
 form.ls-form ul li.half {

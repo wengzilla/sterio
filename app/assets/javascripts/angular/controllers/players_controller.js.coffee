@@ -14,7 +14,7 @@ App.controller "PlayersController", ($scope, playlistsFactory, tracksFactory) ->
   $scope.$watch 'currentTrack', (s) ->
     if $scope.currentTrack?
       $scope.playVideo($scope.currentTrack)
-  
+
   initPlayer = (p) ->
     pubnubConnect()
     getPlaylist(true)

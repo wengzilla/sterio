@@ -35,16 +35,17 @@ LIST PAGES
   padding: 10px 30px 4px 10px;
   color: #dfdfdf;
   margin-bottom: 0;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 300;
-  line-height: 20px;
+  line-height: 16px;
 }
 
 .video-list ul li p {
   color: $gray-50;
   font-weight: normal;
   padding: 0 30px 0 10px;
-  font-size: 14px;
+  font-size: 12px;
+  line-height:12px;
   margin: 0 0 4px;
 }
 
@@ -77,18 +78,9 @@ LIST PAGES
   top: -3.45px;
 }
 
-
-/* MOBILE PHONES */
-@media screen and (max-width: 480px) {
-  .video-list ul li h3 {
-    font-size: 14px;
-    line-height: 14px;
-  }
-
-  .video-list ul li p {
-    font-size: 12px;
-    line-height: 12px;
-  }
+.nav li {
+  float:left;
+  margin-right: 10px;
 }
 
 /* TABLETS */
@@ -104,6 +96,22 @@ LIST PAGES
   }
 }
 
+/* MOBILE PHONES */
+@media screen and (max-width: 480px) {
+  .site-header {
+    text-align:center;
+  }
+
+  .video-list ul li h3 {
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  .video-list ul li p {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
 
 /* CROP VIDEO THUMBNAILS */
 .video-list ul li .crop {
@@ -142,4 +150,68 @@ LIST PAGES
   background:none!important;
   border:none; 
   padding:0!important;
+}
+
+/* PLAYER LAYOUT */
+
+/* FULL SCREEN */
+@media screen and (min-width : 1024px) {
+  .player {
+    .player-wrapper {
+      position: absolute;
+      top: 68px;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      overflow:hidden;
+    }
+
+    .video-wrapper {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      bottom: 0px;
+      right: 402px;
+      background-color: black;
+      border-right: 1px solid #111;
+    }
+
+    .video-list {
+      border-left: 2px solid #333;
+      position: absolute;
+      width: 400px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      overflow-y: scroll;
+    }
+  }
+}
+
+
+/* TABLETS */
+@media screen and (min-width : 481px) and (max-width : 1024px) {
+  .video-wrapper {
+    position:relative;
+    height:390px;
+    min-width:480px;
+  }
+
+  .video-list {
+    position:relative
+  }
+}
+
+/* MOBILE PHONES */
+@media screen and (max-width: 480px) {
+  .video-wrapper {
+    position:relative;
+    height:250px;
+    min-width:200px;
+  }
+
+  .video-list {
+    position:relative
+  }
+
 }
