@@ -1,6 +1,6 @@
 App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactory', ($scope, playlistsFactory, tracksFactory) ->
   $scope.tracks = []
-  $scope.playlist = 1
+  $scope.playlist = {id: 1}
   $scope.shuffle = true
   $scope.sync    = true
   $scope.repeat = true
@@ -41,7 +41,10 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
     $(window).trigger("stopVideo")
 
   $scope.removeTrack = (track, $event) ->
-    tracksFactory.removeTrack($scope.playlist, track.id).then((response) ->
+    # fast reject for display issues...
+    $scope.tracks = _.reject($scope.tracks, (t) -> t.id == track.id)
+
+    tracksFactory.removeTrack($scope.playlist.id, track.id).then((response) ->
       $scope.tracks = response.tracks
     )
 
@@ -57,9 +60,8 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
     if $scope.repeat == false && $scope.currentTrack == _.last(videos)
       return $scope.stopVideo()
 
-    index = (_.indexOf(videos, $scope.currentTrack) + 1) % videos.length
-    index = 0 if index == -1
-    console.log index
+    foundTrack = _.findWhere(videos, {id: $scope.currentTrack.id})
+    index = (_.indexOf(videos, foundTrack) + 1) % videos.length
     $scope.setCurrentTrack(videos[index])
 
   initPlayer = (p) ->
@@ -71,15 +73,16 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
   pubnubConnect = ->
     $scope.pubnub_client = PUBNUB.init({publish_key: $scope.pubKey , subscribe_key: $scope.subKey});
     $scope.pubnub_client.subscribe {
-      'channel': "playlist-#{$scope.playlist}"
+      'channel': "playlist-#{$scope.playlist.id}"
       'callback': (data) =>
         if data?['action']
           getPlaylist(false)
     }
 
   getPlaylist = (setCurrentTrack = true) ->
-    playlistsFactory.getPlaylist($scope.playlist).then((response) ->
-      $scope.tracks = response.data.tracks
+    playlistsFactory.getPlaylist($scope.playlist.id).then((response) ->
+      $scope.playlist = response.data
+      $scope.tracks = $scope.playlist.tracks
 
       if setCurrentTrack
         track = if response.data.current_track

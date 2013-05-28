@@ -11,8 +11,8 @@ class YoutubeParser
     end
   end
 
-  def self.search(terms, quantity=10)
-    videos = client.videos_by(:query => terms, :per_page => quantity, :format => 5).videos
+  def self.search(terms, page, quantity=10)
+    videos = client.videos_by(:query => terms, :page => page, :per_page => quantity, :format => 5).videos
     videos.map do |video|
       encode(video)
     end
