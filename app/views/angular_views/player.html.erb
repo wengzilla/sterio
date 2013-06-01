@@ -17,16 +17,15 @@
       <div class="video-list flush" ng-show="showPlaylist">
         <ul>
           <li ng-repeat="track in tracks" ng-class='{"current-track":currentTrack==track}' ng-click="setCurrentTrack(track)">
-            <span>
-              <span class="crop">
-                <img ng-src="{{track.thumbnail_url}}">
+            <span class="crop">
+              <img ng-src="{{track.thumbnail_url}}">
               </p>
               <div class="duration">{{track.duration | time}}</div>
             </span>
             <div class="video-info">
               <h3>{{track.title | truncate}}</h3>
               <p class="title">{{track.author}}</p>
-              <p class="title"><span class="rating">{{track.rating}}%</span> {{track.view_count}} views</p>
+              <p class="title"><span class="rating">{{track.rating | number: 0}}%</span> {{track.view_count | commaDelimitedNumber}} views</p>
               <div class="video-close">
                 <button ng-click="removeTrack(track, $event)" stop-event="click">×</button>
               </div>

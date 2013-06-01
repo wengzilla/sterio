@@ -22,7 +22,7 @@ class Track < ActiveRecord::Base
       "thumbnail_url" => self.image,
       "duration" => duration,
       "rating" => rating,
-      "view_count" => number_with_delimiter(view_count)
+      "view_count" => view_count.to_s
     }
   end
 

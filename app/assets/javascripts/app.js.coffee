@@ -13,7 +13,7 @@ angular.module('filters', [])
       "#{hours}:#{Util.pad2(minutes)}:#{Util.pad2(seconds)}"
     else
       "#{minutes}:#{Util.pad2(seconds)}")
-  .filter "truncate", ->
+  .filter 'truncate', ->
     (text, length, end) ->
       if $(window).width() < 480
         length = 50
@@ -27,9 +27,9 @@ angular.module('filters', [])
         text
       else
         String(text).substring(0, length - end.length) + end
-  .filter 'iif', () ->
-     (input, trueValue, falseValue) ->
-        input ? trueValue : falseValue
+  .filter 'commaDelimitedNumber', -> (x) ->
+    x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
 
 window.App = angular.module('playerApp', ['filters', 'directives'])
 
