@@ -34,7 +34,7 @@ class Playlist < ActiveRecord::Base
 
   def as_json(options={})
     params = {
-      :url => Rails.application.routes.url_helpers.playlist_path(token),
+      # :url => Rails.application.routes.url_helpers.playlist_path(token),
       :current_track => current_track,
       :tracks => tracks
     }

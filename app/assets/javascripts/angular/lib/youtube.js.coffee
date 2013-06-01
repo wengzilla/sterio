@@ -1,19 +1,25 @@
 class window.YouTube
   constructor: ->
-    @_addScriptTags()
+    if $("#youtube_api").size() == 0
+      @_addScriptTags()
+      @_bindPlayerActions()
+    else
+      window.onYouTubeIframeAPIReady()
+
+  _addScriptTags: ->
+    tag = document.createElement("script")
+    tag.id = "youtube_api"
+    tag.src = "https://www.youtube.com/iframe_api"
+    firstScriptTag = document.getElementsByTagName("script")[0]
+    firstScriptTag.parentNode.insertBefore tag, firstScriptTag
+
+  _bindPlayerActions: ->
     $(window).bind("playerReady", (e, p) => @_wireup(p))
     $(window).bind("videoStateChange", (e, p) => @_stateChange(p))
     $(window).bind("playVideo", (e, t) => @_playVideo(t))
     $(window).bind("stopVideo", (e, t) => @_stopVideo(t))
 
-  _addScriptTags: ->
-    tag = document.createElement("script")
-    tag.src = "https://www.youtube.com/iframe_api"
-    firstScriptTag = document.getElementsByTagName("script")[0]
-    firstScriptTag.parentNode.insertBefore tag, firstScriptTag
-
   _wireup: (p) ->
-    window.test = p
     @video_player = p
     @_bindKeys()
     $(window).trigger("videoReady")

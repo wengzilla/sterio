@@ -8,6 +8,10 @@ LIST PAGES
 ==========================
 */
 
+.video-list {
+  width: 100%;
+}
+
 .video-list ul {
   padding: 0;
   margin: 0;
@@ -274,6 +278,10 @@ LIST PAGES
 
 /* MOBILE PHONES */
 @media screen and (max-width: 480px) {
+  .video-list {
+    overflow-x: hidden;
+  }
+
   .video-wrapper {
     position:relative;
     height:250px;

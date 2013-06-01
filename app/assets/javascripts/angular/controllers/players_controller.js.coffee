@@ -12,8 +12,16 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
   $scope.pubKey='pub-b0ec0cb4-6582-4e85-9c9e-1eae9873461a'
   $scope.subKey='sub-7c99adeb-fb9b-11e0-8d34-3773e0dc0c14'
 
+  yt = new YouTube
+
+  # ========= BINDS ==========
+
   $(window).bind("videoReady", (e, p) => initPlayer(p))
   $(window).bind("playerStateChange", (e, s) => setPlayerState(s))
+
+  $scope.$on '$destroy', () -> 
+    $(window).unbind("videoReady")
+    $(window).unbind("playerStateChange")
 
   # ========= WATCHERS =========
 
@@ -108,6 +116,4 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
         if not $(e.target).is('input')
           $scope.nextVideo(false)
           $scope.$apply()
-
-  yt = new YouTube
 ])

@@ -2,18 +2,17 @@ App.config(['$routeProvider', ($routeProvider) ->
   $routeProvider
     .when('/search',
     {
-      controller: 'SearchesController',
       templateUrl: 'search' 
     })
-    .when('/playlist',
+    .when('partials/playlist',
     {
       controller: 'PlaylistsController',
-      templateUrl: 'playlist'
+      templateUrl: 'partials/playlist'
     })
     .when('/player',
     {
       controller: 'PlayersController',
-      templateUrl: 'player'
+      templateUrl: 'partials/player'
     })
-    .otherwise({ redirectTo: '/search' })
+    .otherwise({ redirectTo: '/player' })
 ])
