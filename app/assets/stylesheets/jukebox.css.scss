@@ -27,6 +27,7 @@ LIST PAGES
   border-bottom: 1px solid $list_border_color;
   background: $whale;
   word-wrap: break-word;
+  cursor: pointer;
 }
 
 .video-list ul li.current-track {
@@ -48,6 +49,7 @@ LIST PAGES
 
   li:hover {
     color: #666;
+    cursor: pointer;
   }
 
   li.active {

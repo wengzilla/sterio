@@ -2,7 +2,7 @@ App.config(['$routeProvider', ($routeProvider) ->
   $routeProvider
     .when('/search',
     {
-      templateUrl: 'search' 
+      templateUrl: 'partials/search'
     })
     .when('partials/playlist',
     {
