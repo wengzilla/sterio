@@ -2,6 +2,7 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
   $scope.playlist = 1
   $scope.current_page = 1
   $scope.tracks = []
+  $scope.showMobile = $('#app-info').data('mobile')
 
   $scope.$watch 'query', (query) ->
     $scope.current_page = 1
@@ -33,27 +34,37 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
         )
     $scope.timeout = setTimeout(run, 300)
 
+  $scope.getNextPage = () ->
+    $scope.current_page += 1
+    console.log $scope.current_page
+    $scope.search($scope.query, $scope.current_page)
+
   init = () ->
     _bindInfiniteScroll()
-    new StickyHeader(el) if el = $(".search-query").get(0)
+
+  _scrollable = () ->
+    if $scope.showMobile then $(document) else $(".search-results")
+
+  _shouldGetResults = () ->
+    if $scope.showMobile
+      # distance scrolled + window height >= total height of document
+      _scrollable().scrollTop() + $(window).height() >= _scrollable().height() - 200
+    else
+      # distance scrolled in search results + window height >= total height of search results container
+      _scrollable().scrollTop() + $(window).height() >= _scrollable().get(0).scrollHeight - 200
 
   _bindInfiniteScroll = () ->
     # infinite scroll # ok
-    scrollable = $(".search-results")
     _unbindInfiniteScroll()
-    scrollable.bind 'scroll', () ->
-      console.log "scrolling"
-      if scrollable.scrollTop() + $(window).height() >= scrollable.get(0).scrollHeight
-        console.log $scope.current_page
+    _scrollable().bind 'scroll', () ->
+      if _shouldGetResults()
         _unbindInfiniteScroll()
-        $scope.current_page += 1
-        $scope.search($scope.query, $scope.current_page)
+        $scope.getNextPage()
 
   _unbindInfiniteScroll = () ->
-    $(".search-results").unbind 'scroll'
+    _scrollable().unbind 'scroll'
 
   _pushTracks = (tracks) ->
-    console.log tracks
     if $scope.current_page == 1 || !$scope.tracks? #iPhone wasn't starting on page 1...
       $scope.tracks = tracks
     else

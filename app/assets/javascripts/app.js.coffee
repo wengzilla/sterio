@@ -30,7 +30,6 @@ angular.module('filters', [])
   .filter 'commaDelimitedNumber', -> (x) ->
     x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-
 window.App = angular.module('playerApp', ['filters', 'directives'])
 
 window.onload = ->

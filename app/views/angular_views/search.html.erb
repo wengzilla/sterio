@@ -1,21 +1,68 @@
-<div class="video-list flush search-results" ng-controller="SearchesController">
-  <div class="container">
-    <input class="search-query" type="text" ng-model="query" placeholder="Search (e.g, Eminem)" autocorrect="off" autocapitalize="off"/>
+<div ng-controller="SearchesController">
+  <div class="video-list flush search-results">
+    <div class="container">
+      <input class="search-query" type="text" ng-model="query" placeholder="Search (e.g, Eminem)" autocorrect="off" autocapitalize="off"/>
+    </div>
+    <div>
+      <ul>
+        <li class="fade in" ng-repeat="track in tracks" ng-click="createTrack(track)" collapse-on-click>
+          <span class="crop">
+            <img ng-src="{{track.thumbnail_url}}">
+            </p>
+            <div class="duration">{{track.duration | time}}</div>
+          </span>
+          <div class="video-info">
+            <h3>{{track.title | truncate}}</h3>
+            <p class="title">{{track.author}}</p>
+            <p class="title"><span class="rating">{{track.rating | number: 0}}%</span> {{track.view_count | commaDelimitedNumber}} views</p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div>
+
+  <div class="footer" ng-show="showMobile">
     <ul>
-      <li class="fade in" ng-repeat="track in tracks" ng-click="createTrack(track)" collapse-on-click>
-        <span class="crop">
-          <img ng-src="{{track.thumbnail_url}}">
-          </p>
-          <div class="duration">{{track.duration | time}}</div>
-        </span>
-        <div class="video-info">
-          <h3>{{track.title | truncate}}</h3>
-          <p class="title">{{track.author}}</p>
-          <p class="title"><span class="rating">{{track.rating | number: 0}}%</span> {{track.view_count | commaDelimitedNumber}} views</p>
-        </div>
-      </li>
-    </ul>
+      <li><a href="mobile/#/search"><i class="icon-search"></i><p class="icon-label">Search</p></a></li><li><a href="mobile/#/playlist"><i class="icon-list"></i><p class="icon-label">Playlist</p></a></li><li><i class="icon-star-empty"></i><p class="icon-label">Favorites</p></li>
   </div>
 </div>
+
+<style>
+  .icon-label {
+    padding:0px;
+    margin:0px;
+    font-size:10px;
+    line-height: 100%;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    background-color: #111;
+    width: 100%;
+  }
+
+  .footer a {
+    color: white !important;
+  }
+
+  .footer i {
+    display: block;
+  }
+
+  .footer ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer ul li {
+    color: white;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px solid #666;
+    border-left: 1px solid #333;
+    margin: 0;
+    padding: 10px 0 5px;
+    width: 75px;
+  }
+</style>

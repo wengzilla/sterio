@@ -51,10 +51,8 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
   $scope.removeTrack = (track, $event) ->
     # fast reject for display issues...
     $scope.tracks = _.reject($scope.tracks, (t) -> t.id == track.id)
-
-    tracksFactory.removeTrack($scope.playlist.id, track.id).then((response) ->
-      $scope.tracks = response.tracks
-    )
+    # pubnub will pick up the remove track and refresh entire playlist...
+    tracksFactory.removeTrack($scope.playlist.id, track.id)
 
   $scope.nextVideo = (allowRepeat = true) ->
     videos = if $scope.shuffle then $scope.shuffledTracks else $scope.tracks
@@ -93,12 +91,8 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
       $scope.tracks = $scope.playlist.tracks
 
       if setCurrentTrack
-        track = if response.data.current_track
-          response.data.current_track
-        else
-          index = if $scope.shuffle then _.first(_.shuffle([0...$scope.tracks.length])) else 0
-          response.data.tracks[index]
-
+        index = if $scope.shuffle then _.first(_.shuffle([0...$scope.tracks.length])) else 0
+        track = response.data.tracks[index]
         $scope.setCurrentTrack(track)
     )
 

@@ -24,7 +24,7 @@ class ItunesSong
   end
 
   def title
-    song["im:name"]["label"]
+    song["title"]["label"]
   end
 
   def external_id
