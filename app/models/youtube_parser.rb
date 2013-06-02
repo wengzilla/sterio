@@ -1,5 +1,4 @@
 class YoutubeParser
-
   def self.parse(link)
     begin
       raise '' if link.blank?

@@ -11,14 +11,9 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
     _unbindInfiniteScroll()
 
   window.searchCallback = (data) ->
-    tracks = searchesFactory.formatYouTubeResults(data.feed.entry)
-
-    if $scope.current_page == 1 || !$scope.tracks? #iPhone wasn't starting on page 1...
-      $scope.tracks = tracks
-    else
-      $scope.tracks = $scope.tracks.concat(tracks)
-      $scope.$apply()
-
+    response = searchesFactory.formatYouTubeResults(data.feed.entry)
+    _pushTracks(response)
+    $scope.$apply()
     _bindInfiniteScroll()
 
   $scope.search = (query, page=1, valueChanged=false) ->
@@ -29,8 +24,13 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
     # to move back to the top. 
     $('#results_container').scrollTop(0) if valueChanged && page == 1
     run = ->
-      searchesFactory.getYouTubeResults('videos', query, $scope.current_page)
-
+      if query?
+        searchesFactory.getYouTubeResults('videos', query, $scope.current_page)
+      else
+        searchesFactory.getTopItunesSongs($scope.current_page).then((response) ->
+          _pushTracks(response.data)
+          _bindInfiniteScroll()
+        )
     $scope.timeout = setTimeout(run, 300)
 
   init = () ->
@@ -51,6 +51,13 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
 
   _unbindInfiniteScroll = () ->
     $(".search-results").unbind 'scroll'
+
+  _pushTracks = (tracks) ->
+    console.log tracks
+    if $scope.current_page == 1 || !$scope.tracks? #iPhone wasn't starting on page 1...
+      $scope.tracks = tracks
+    else
+      $scope.tracks = $scope.tracks.concat(tracks)
 
   $scope.createTrack = (track) ->
     tracksFactory.createTrack($scope.playlist, track.external_id)

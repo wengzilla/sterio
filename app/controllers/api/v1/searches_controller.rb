@@ -1,9 +1,6 @@
 class Api::V1::SearchesController < Api::ApiController
   def index
-    if params[:query].present?
-      results = YoutubeParser.search(params[:query], params[:page], 20)
-    else
-    end
+    results = Track.get_top_itunes_songs(params[:page].to_i, params[:limit].to_i)
     render :json => results
   end
 end

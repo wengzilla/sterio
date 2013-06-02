@@ -26,6 +26,14 @@ class Track < ActiveRecord::Base
     }
   end
 
+  def self.search_by_title(title)
+    YoutubeParser.search(title, 1, 1).first
+  end
+
+  def self.get_top_itunes_songs(page=1, limit=10)
+    Itunes.top_songs[(page-1)*limit..(page*limit)-1]
+  end
+
   after_create { publish('addTrack') }
   after_destroy { publish('removeTrack') }
 
