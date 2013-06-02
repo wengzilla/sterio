@@ -1,8 +1,8 @@
-<div class="video-list flush" ng-controller="SearchesController">
+<div class="video-list flush search-results" ng-controller="SearchesController">
   <div class="container">
-    <input type="text" ng-model="query" placeholder="Search (e.g, Eminem)" />
+    <input class="search-query" type="text" ng-model="query" placeholder="Search (e.g, Eminem)" autocorrect="off" autocapitalize="off"/>
   </div>
-  <div class="video-list flush">
+  <div>
     <ul>
       <li class="fade in" ng-repeat="track in tracks" ng-click="createTrack(track)" collapse-on-click>
         <span class="crop">

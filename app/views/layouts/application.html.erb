@@ -18,7 +18,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<div id="app-info" data-mobile="<%= @mobile | false %>"></div>
 <%= render :partial => "layouts/navbar" %>
 
 <%= yield %>

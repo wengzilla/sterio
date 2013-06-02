@@ -45,3 +45,6 @@ gem 'spiderable'
 
 # tokens
 gem 'uniquify'
+
+# storing the top itunes songs
+gem 'redis'

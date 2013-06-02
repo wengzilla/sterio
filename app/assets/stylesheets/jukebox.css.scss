@@ -133,6 +133,13 @@ LIST PAGES
   margin-right: 10px;
 }
 
+/* STICKY HEADER */
+.sticky {
+  position: fixed !important;
+  top: 0 !important;
+  z-index: 1 !important;
+}
+
 /* TABLETS */
 @media screen and (min-width : 481px) and (max-width : 1024px) {
   .video-list ul li h3 {

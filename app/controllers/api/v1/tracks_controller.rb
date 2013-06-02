@@ -1,6 +1,6 @@
 class Api::V1::TracksController < Api::ApiController
   def index
-    if true #playlist.has_access?(current_user)
+    if true
       render :json => playlist.ordered_tracks.to_json
     else
       render :json => false, :status => :unauthenticated
@@ -10,7 +10,7 @@ class Api::V1::TracksController < Api::ApiController
   def create
     track = YoutubeParser.parse(params[:external_id])
 
-    if track# and playlist.can_edit?(current_user)
+    if track
       # track.user = current_user
       track.playlist = playlist
       track.save!
@@ -22,7 +22,7 @@ class Api::V1::TracksController < Api::ApiController
 
   def destroy
     track = playlist.tracks.find(params[:id])
-    if track && track.destroy# and playlist.can_edit?(current_user)
+    if track && track.destroy
       render :json => {:tracks => playlist.tracks}
     else
       render :json => false

@@ -1,6 +1,6 @@
 class Playlist < ActiveRecord::Base
-  attr_accessible :description, :is_private, :name, :user_id, :token, 
-                  :view_count, :user, :shared
+  attr_accessible :description, :name, :user_id, :token, 
+                  :view_count, :user
 
   belongs_to :user
   uniquify :token
@@ -10,16 +10,6 @@ class Playlist < ActiveRecord::Base
 
   validates :name, :presence => true, :length => { :maximum => 20 }
   # validates :user, :presence => true
-
-  default_scope where(:active => true)
-
-  def has_access?(user)
-    !!(self.is_private ? user && self.user == user : true)
-  end
-
-  def can_edit?(user)
-    user == self.user || (self.shared && user)
-  end
 
   def ordered_tracks
     tracks

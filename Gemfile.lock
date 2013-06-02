@@ -130,6 +130,7 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (2.2.2)
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -202,6 +203,7 @@ DEPENDENCIES
   pg
   pubnub
   rails (= 3.2.13)
+  redis
   sass
   sass-rails (~> 3.2.3)
   sorcery (~> 0.7.13)

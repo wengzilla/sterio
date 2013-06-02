@@ -16,13 +16,14 @@ App.factory("searchesFactory", ['$http', ($http) ->
 
   factory.getYouTubeResults = (type='videos', query, page=1) ->
     unless query?
-      url = urlBase + "standardfeeds/most_popular_Music?v=2&sort_by=top_favorites&time=today&start-index=" + page + "&max-results=" + count + "&safeSearch=none&v=2&alt=json&callback=" + callback;
+      url = urlBase + "standardfeeds/most_popular_Music?v=2&sort_by=top_favorites&time=today&start-index=" + page * count + "&max-results=" + count + "&safeSearch=none&v=2&alt=json&callback=" + callback;
     else
-      url =  urlBase + type + "?q=" + query + "&start-index=" + page + "&max-results=" + count + "&safeSearch=none&v=2&alt=json&callback=" + callback;
+      url =  urlBase + type + "?q=" + query + "&start-index=" + page * count + "&max-results=" + count + "&safeSearch=none&v=2&alt=json&callback=" + callback;
     # callback parameter in URL will call window.searchCallback() on completion
     $http.jsonp(url)
 
   factory.formatYouTubeResults = (results) ->
+    console.log results
     formattedResults = []
     for result in results
       formattedResults.push({

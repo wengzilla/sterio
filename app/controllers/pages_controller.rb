@@ -7,5 +7,6 @@ class PagesController < ApplicationController
   end
 
   def mobile
+    @mobile = true
   end
 end

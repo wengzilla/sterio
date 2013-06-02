@@ -3,9 +3,12 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
   $scope.current_page = 1
   $scope.tracks = []
 
-  $scope.$watch 'query', (query) -> 
+  $scope.$watch 'query', (query) ->
     $scope.current_page = 1
     $scope.search(query, $scope.current_page, true)
+
+  $scope.$on '$destroy', () ->
+    _unbindInfiniteScroll()
 
   window.searchCallback = (data) ->
     tracks = searchesFactory.formatYouTubeResults(data.feed.entry)
@@ -32,20 +35,22 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
 
   init = () ->
     _bindInfiniteScroll()
+    new StickyHeader(el) if el = $(".search-query").get(0)
 
   _bindInfiniteScroll = () ->
     # infinite scroll # ok
-    results = $(document)
+    scrollable = $(".search-results")
     _unbindInfiniteScroll()
-    results.bind 'scroll', () ->
-      if $(document).scrollTop() + $(window).height() >= $(document).height() - 200
+    scrollable.bind 'scroll', () ->
+      console.log "scrolling"
+      if scrollable.scrollTop() + $(window).height() >= scrollable.get(0).scrollHeight
+        console.log $scope.current_page
         _unbindInfiniteScroll()
         $scope.current_page += 1
         $scope.search($scope.query, $scope.current_page)
 
   _unbindInfiniteScroll = () ->
-    results = $(document)
-    results.unbind 'scroll'
+    $(".search-results").unbind 'scroll'
 
   $scope.createTrack = (track) ->
     tracksFactory.createTrack($scope.playlist, track.external_id)

@@ -5,11 +5,7 @@ class FirstMigration < ActiveRecord::Migration
       t.string   "description"
       t.integer  "view_count",         :default => 0
       t.integer  "user_id"
-      t.boolean  "is_private",         :default => false
-      t.boolean  "shared",             :default => false
-      t.boolean  "active",             :default => true
       t.string   "token"
-      t.integer  "current_track_id"
       t.datetime "created_at",                            :null => false
       t.datetime "updated_at",                            :null => false
     end

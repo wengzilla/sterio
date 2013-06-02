@@ -1,6 +1,6 @@
 class Api::V1::PlaylistsController < Api::ApiController
   def show
-    if true #playlist.has_access?(current_user)
+    if true
       render :json => playlist.to_json
     else
       render :json => false, :status => :unauthenticated
