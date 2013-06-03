@@ -14,8 +14,9 @@ App.controller("PlaylistsController", ['$scope', 'playlistsFactory', 'tracksFact
       'callback': (data) =>
         if data?['action'] == 'addTrack' | data?['action'] == 'removeTrack'
           getPlaylist(false)
-        elsif data?['action] == 'playTrack'
-          $scope.currentTrack = data?[trackId]
+        else if data?['action'] == 'playTrack'
+          $scope.currentTrack = {'id': data?['trackId']}
+          $scope.$apply()
     }
 
   getPlaylist = () ->

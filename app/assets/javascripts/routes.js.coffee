@@ -6,7 +6,6 @@ App.config(['$routeProvider', ($routeProvider) ->
     })
     .when('/playlist',
     {
-      controller: 'PlaylistsController',
       templateUrl: 'partials/playlist'
     })
     .when('/player',

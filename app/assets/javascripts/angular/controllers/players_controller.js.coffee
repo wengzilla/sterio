@@ -11,6 +11,7 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
   $scope.playerState = ""
   $scope.pubKey='pub-b0ec0cb4-6582-4e85-9c9e-1eae9873461a'
   $scope.subKey='sub-7c99adeb-fb9b-11e0-8d34-3773e0dc0c14'
+  $scope.pubnub_client = PUBNUB.init({publish_key: $scope.pubKey , subscribe_key: $scope.subKey});
 
   yt = new YouTube
 
@@ -33,9 +34,13 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
     if s == "ENDED"
       $scope.nextVideo()
 
-  $scope.$watch 'currentTrack', (s) ->
+  $scope.$watch 'currentTrack', ->
     if $scope.currentTrack?
       $scope.playVideo($scope.currentTrack)
+      $scope.pubnub_client.publish {
+        channel: "playlist-#{$scope.playlist.id}",
+        message: { 'action':'playTrack', 'trackId': $scope.currentTrack.id}
+      }
 
   # ========= SCOPE METHODS =========
 
@@ -77,7 +82,6 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
     bindKeys()
 
   pubnubConnect = ->
-    $scope.pubnub_client = PUBNUB.init({publish_key: $scope.pubKey , subscribe_key: $scope.subKey});
     $scope.pubnub_client.subscribe {
       'channel': "playlist-#{$scope.playlist.id}"
       'callback': (data) =>
