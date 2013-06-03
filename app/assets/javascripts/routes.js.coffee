@@ -4,7 +4,7 @@ App.config(['$routeProvider', ($routeProvider) ->
     {
       templateUrl: 'partials/search'
     })
-    .when('partials/playlist',
+    .when('/playlist',
     {
       controller: 'PlaylistsController',
       templateUrl: 'partials/playlist'
@@ -14,5 +14,9 @@ App.config(['$routeProvider', ($routeProvider) ->
       controller: 'PlayersController',
       templateUrl: 'partials/player'
     })
-    .otherwise({ redirectTo: '/player' })
+    .otherwise({ redirectTo: if isMobile()
+        console.log "I'm here"
+        '/search'
+      else
+        '/player'})
 ])

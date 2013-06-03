@@ -14,9 +14,5 @@ Jukebox::Application.routes.draw do
 
   resources :searches, :only => [:index]
 
-  scope '/mobile' do
-    root :to => "pages#mobile", :as => :mobile_root
-  end
-
   root :to => 'pages#index'
 end

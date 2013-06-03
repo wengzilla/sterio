@@ -2,7 +2,7 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
   $scope.playlist = 1
   $scope.current_page = 1
   $scope.tracks = []
-  $scope.showMobile = $('#app-info').data('mobile')
+  $scope.showMobile = window.isMobile()
 
   $scope.$watch 'query', (query) ->
     $scope.current_page = 1

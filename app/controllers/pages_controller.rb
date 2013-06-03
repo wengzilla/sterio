@@ -3,10 +3,5 @@ class PagesController < ApplicationController
   include ContentNegotiation
 
   def index
-    redirect_to mobile_root_path if is_device_request?
-  end
-
-  def mobile
-    @mobile = true
   end
 end

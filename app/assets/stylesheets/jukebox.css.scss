@@ -133,13 +133,6 @@ LIST PAGES
   margin-right: 10px;
 }
 
-/* STICKY HEADER */
-.sticky {
-  position: fixed !important;
-  top: 0 !important;
-  z-index: 1 !important;
-}
-
 /* TABLETS */
 @media screen and (min-width : 481px) and (max-width : 1024px) {
   .video-list ul li h3 {
@@ -301,4 +294,80 @@ LIST PAGES
     position:relative
   }
 
+  .icon-label {
+    padding:0px;
+    margin:0px;
+    font-size:10px;
+    line-height: 100%;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    background-color: #111;
+    width: 100%;
+  }
+
+  .footer a {
+    color: white !important;
+  }
+
+  .footer i {
+    display: block;
+  }
+
+  .footer ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer ul li {
+    color: white;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px solid #666;
+    border-left: 1px solid #333;
+    margin: 0;
+    padding: 10px 0 5px;
+    width: 75px;
+  }
+}
+
+/* FOOTER */
+.icon-label {
+  padding:0px;
+  margin:0px;
+  font-size:10px;
+  line-height: 100%;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  background-color: #111;
+  width: 100%;
+}
+
+.footer a {
+  color: white !important;
+}
+
+.footer i {
+  display: block !important;
+}
+
+.footer ul {
+  padding: 0;
+  margin: 0;
+}
+
+.footer ul li {
+  color: white;
+  display: inline-block;
+  text-align: center;
+  border-right: 1px solid #666;
+  border-left: 1px solid #333;
+  margin: 0;
+  padding: 10px 0 5px;
+  width: 75px;
 }

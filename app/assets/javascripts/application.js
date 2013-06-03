@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require hammer.min
+//= require ismobile
 //= require jquery.hammer.min
 //= require underscore
 //= require fastclick

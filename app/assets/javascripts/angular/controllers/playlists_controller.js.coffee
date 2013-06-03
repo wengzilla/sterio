@@ -12,8 +12,10 @@ App.controller("PlaylistsController", ['$scope', 'playlistsFactory', 'tracksFact
     $scope.pubnub_client.subscribe {
       'channel': "playlist-#{$scope.playlist}"
       'callback': (data) =>
-        if data?['action']
+        if data?['action'] == 'addTrack' | data?['action'] == 'removeTrack'
           getPlaylist(false)
+        elsif data?['action] == 'playTrack'
+          $scope.currentTrack = data?[trackId]
     }
 
   getPlaylist = () ->
