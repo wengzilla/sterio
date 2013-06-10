@@ -1,4 +1,18 @@
-  <div class="video-list flush" ng-controller="PlaylistsController">
+<div ng-controller="PlaylistsController">
+  <div class="current-video" ng-show="showCurrentVideo()">
+    <div class="video-command-bar">
+        <img ng-src="{{currentTrack.thumbnail_url}}">
+        <div class="video-info">
+          <h3>{{currentTrack.title | truncate}}</h3>
+          <p class="title">{{currentTrack.author}}</p>
+          <p class="title"><span class="rating">{{currentTrack.rating | number: 0}}%</span> {{currentTrack.view_count | commaDelimitedNumber}} views</p>
+        </div>
+        <ul>
+          <li ng-click="sendAction('playTrack')"><i class="icon-play"></i></li><li ng-click="sendAction('pauseTrack')"><i class="icon-pause"></i></li><li ng-click="sendAction('nextTrack')"><i class="icon-step-forward"></i></li>
+        </ul>
+      </div>
+  </div>
+  <div class="video-list flush">
     <ul>
       <li ng-repeat="track in tracks" ng-class='{"current-track":currentTrack.id==track.id}' ng-click="setCurrentTrack(track)">
         <span class="crop">
@@ -17,3 +31,4 @@
       </li>
     </ul>
   </div>
+</div>

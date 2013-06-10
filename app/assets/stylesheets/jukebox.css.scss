@@ -80,7 +80,7 @@ LIST PAGES
   min-height: 55px;
 }
 
-.video-list ul li h3 {
+.video-list ul li h3, .current-video h3 {
   margin-top: 0;
   padding: 10px 30px 4px 10px;
   color: #dfdfdf;
@@ -90,7 +90,7 @@ LIST PAGES
   line-height: 16px;
 }
 
-.video-list ul li p {
+.video-list ul li p, .current-video p {
   color: $gray-50;
   font-weight: normal;
   padding: 0 30px 0 10px;
@@ -221,7 +221,7 @@ LIST PAGES
 
 /* FULL SCREEN */
 @media screen and (min-width : 1024px) {
-  .video-command-bar {
+  .right-col .video-command-bar {
     position: absolute;
     top: 0;
     z-index: 1;
@@ -370,4 +370,48 @@ LIST PAGES
   margin: 0;
   padding: 10px 0 5px;
   width: 75px;
+}
+
+.current-video .video-command-bar {
+  font-size: 30px;
+  min-height: 45px;
+  background-color: #111;
+  text-align: center;
+
+  ul {
+    list-style: none !important;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  li:hover {
+    color: #666;
+    cursor: pointer;
+  }
+
+  li.active {
+    color: #AD61B9;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0px;
+    border: 0;
+    border-right: 1px solid #333;
+    border-left: 1px solid #222;
+    min-height: 0px;
+    padding: 8px 33px;
+    background-color: transparent;
+  }
+
+  li:first-child {
+    border-left: 0;
+  }
+  li:last-child {
+    border-right: 0;
+  }
+
+  i {
+    color: white;
+  }
 }

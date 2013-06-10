@@ -12,6 +12,7 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
   $scope.pubKey='pub-b0ec0cb4-6582-4e85-9c9e-1eae9873461a'
   $scope.subKey='sub-7c99adeb-fb9b-11e0-8d34-3773e0dc0c14'
   $scope.pubnub_client = PUBNUB.init({publish_key: $scope.pubKey , subscribe_key: $scope.subKey});
+  $scope.pubnub_uuid = PUBNUB.uuid()
 
   yt = new YouTube
 
@@ -39,7 +40,7 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
       $scope.playVideo($scope.currentTrack)
       $scope.pubnub_client.publish {
         channel: "playlist-#{$scope.playlist.id}",
-        message: { 'action':'playTrack', 'trackId': $scope.currentTrack.id}
+        message: { 'action':'playTrack', 'trackId': $scope.currentTrack.id, 'uuid': $scope.pubnub_uuid }
       }
 
   # ========= SCOPE METHODS =========
@@ -84,9 +85,25 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
   pubnubConnect = ->
     $scope.pubnub_client.subscribe {
       'channel': "playlist-#{$scope.playlist.id}"
-      'callback': (data) =>
-        if data?['action']
-          getPlaylist(false)
+      'message': (data) =>
+        console.log data
+        if $scope.pubnub_uuid != data.uuid
+          switch data?['action']
+            when "addTrack", "removeTrack" then getPlaylist(false)
+            when "playTrack" then $scope.playVideo()
+            when "pauseTrack" then $scope.stopVideo()
+            when "nextTrack"
+              $scope.nextVideo(false)
+              $scope.$apply()
+            when "requestInfo"
+              publishInfo()
+            else console.log("Action not found.")
+    }
+
+  publishInfo = () ->
+    $scope.pubnub_client.publish {
+      channel: "playlist-#{$scope.playlist.id}",
+      message: { 'action': 'publishInfo','state': $scope.playerState, 'trackId': $scope.currentTrack.id, 'uuid': $scope.pubnub_uuid }
     }
 
   getPlaylist = (setCurrentTrack = true) ->

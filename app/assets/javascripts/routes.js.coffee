@@ -14,7 +14,6 @@ App.config(['$routeProvider', ($routeProvider) ->
       templateUrl: 'partials/player'
     })
     .otherwise({ redirectTo: if isMobile()
-        console.log "I'm here"
         '/search'
       else
         '/player'})
