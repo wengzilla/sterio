@@ -48,7 +48,7 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
   _shouldGetResults = () ->
     if $scope.showMobile
       # distance scrolled + window height >= total height of document
-      _scrollable().scrollTop() + $(window).height() >= _scrollable().height() - 200
+      _scrollable().scrollTop() + $(window).height() >= _scrollable().height() - 100
     else
       # distance scrolled in search results + window height >= total height of search results container
       _scrollable().scrollTop() + $(window).height() >= _scrollable().get(0).scrollHeight - 200
