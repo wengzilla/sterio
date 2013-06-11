@@ -61,9 +61,7 @@ App.controller("PlaylistsController", ['$scope', 'playlistsFactory', 'tracksFact
     )
 
   $scope.showCurrentVideo = () ->
-    # console.log angular.isDefined($scope.currentTrack)
-    # angular.isDefined($scope.currentTrack) && $scope.showMobile
-    angular.isDefined($scope.currentTrack)
+    $scope.currentTrack && $scope.showMobile
 
   init()
 ])

@@ -39,7 +39,6 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
   $scope.$watch 'currentTrack', ->
     if $scope.currentTrack?
       $scope.playVideo($scope.currentTrack)
-      console.log("HERE")
       $scope.pubnub_client.publish {
         channel: channelName(),
         message: { 'action':'playTrack', 'trackId': $scope.currentTrack.id, 'uuid': $scope.pubnub_uuid }

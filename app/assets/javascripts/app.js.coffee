@@ -23,7 +23,7 @@ angular.module('filters', [])
         length = 50
 
       end = "..."  if end is `undefined`
-      if text.length <= length or text.length - end.length <= length
+      if text? && (text.length <= length or text.length - end.length <= length)
         text
       else
         String(text).substring(0, length - end.length) + end
