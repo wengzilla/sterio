@@ -5,50 +5,65 @@ App.controller("PlaylistsController", ['$scope', 'playlistsFactory', 'tracksFact
   $scope.showMobile = window.isMobile()
   $scope.pubnub_uuid = PUBNUB.uuid()
 
+  $scope.$on '$destroy', () -> 
+    pubnubDisconnect()
+
   init = () ->
     pubnubConnect()
     getPlaylist()
 
   pubnubConnect = ->
     $scope.pubnub_client = PUBNUB.init({publish_key: $scope.pubKey , subscribe_key: $scope.subKey});
-    $scope.pubnub_client.subscribe {
-      'channel': "playlist-#{$scope.playlist.id}"
+    $scope.pubnub_client.subscribe
+      'channel': channelName()
       'connect': () =>
         getCurrentTrack()
-      'callback': (data) =>
+      'message': (data) =>
+        console.log data
         if $scope.pubnub_uuid != data.uuid
           switch data?['action']
             when "addTrack", "removeTrack" then getPlaylist(false)
             when "playTrack", "publishInfo"
               $scope.currentTrack = _.findWhere($scope.tracks, {id: data?['trackId']})
+              $scope.currentTracks = [$scope.currentTrack]
               $scope.$apply()
             else console.log("Action not found.")
-    }
+
+  pubnubDisconnect = ->
+    $scope.pubnub_client.unsubscribe
+      'channel': channelName()
+
+  channelName = () ->
+    "playlist-#{$scope.playlist.id}"
+
 
   getCurrentTrack = () ->
-    $scope.pubnub_client.publish {
-      channel: "playlist-#{$scope.playlist.id}",
+    $scope.pubnub_client.publish
+      channel: channelName()
       message: { 'action': 'requestInfo', 'uuid': $scope.pubnub_uuid }
-    }
 
   getPlaylist = () ->
     playlistsFactory.getPlaylist($scope.playlist.id).then((response) ->
       $scope.tracks = response.data.tracks
     )
 
-  $scope.sendAction = (action) ->
-    $scope.pubnub_client.publish {
-      channel: "playlist-#{$scope.playlist.id}",
-      message: { 'action': action, 'uuid': $scope.pubnub_uuid }
-    }
+  $scope.sendAction = (action, track = null) ->
+    $scope.pubnub_client.publish
+      channel: channelName()
+      message: { 'action': action, 'uuid': $scope.pubnub_uuid, 'track': track }
 
   $scope.removeTrack = (track, $event) ->
-    tracksFactory.removeTrack($scope.playlist, track.id).then((response) ->
+    # fast reject for display issues...
+    $scope.tracks = _.reject($scope.tracks, (t) -> t.id == track.id)
+
+    tracksFactory.removeTrack($scope.playlist.id, track.id).then((response) ->
       $scope.tracks = response.tracks
     )
 
   $scope.showCurrentVideo = () ->
-    $scope.currentTrack? && $scope.showMobile
+    # console.log angular.isDefined($scope.currentTrack)
+    # angular.isDefined($scope.currentTrack) && $scope.showMobile
+    angular.isDefined($scope.currentTrack)
 
   init()
 ])

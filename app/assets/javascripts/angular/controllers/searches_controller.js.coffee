@@ -1,5 +1,5 @@
 App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactory', ($scope, searchesFactory, tracksFactory) ->
-  $scope.playlist = 1
+  $scope.playlist = {'id': 1}
   $scope.current_page = 1
   $scope.tracks = []
   $scope.showMobile = window.isMobile()
@@ -71,7 +71,7 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
       $scope.tracks = $scope.tracks.concat(tracks)
 
   $scope.createTrack = (track) ->
-    tracksFactory.createTrack($scope.playlist, track.external_id)
+    tracksFactory.createTrack($scope.playlist.id, track.external_id)
 
   init()
 ])

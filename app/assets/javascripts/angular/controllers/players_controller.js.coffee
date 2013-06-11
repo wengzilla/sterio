@@ -24,6 +24,7 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
   $scope.$on '$destroy', () -> 
     $(window).unbind("videoReady")
     $(window).unbind("playerStateChange")
+    pubnubDisconnect()
 
   # ========= WATCHERS =========
 
@@ -38,8 +39,9 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
   $scope.$watch 'currentTrack', ->
     if $scope.currentTrack?
       $scope.playVideo($scope.currentTrack)
+      console.log("HERE")
       $scope.pubnub_client.publish {
-        channel: "playlist-#{$scope.playlist.id}",
+        channel: channelName(),
         message: { 'action':'playTrack', 'trackId': $scope.currentTrack.id, 'uuid': $scope.pubnub_uuid }
       }
 
@@ -53,12 +55,6 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
 
   $scope.stopVideo = ->
     $(window).trigger("stopVideo")
-
-  $scope.removeTrack = (track, $event) ->
-    # fast reject for display issues...
-    $scope.tracks = _.reject($scope.tracks, (t) -> t.id == track.id)
-    # pubnub will pick up the remove track and refresh entire playlist...
-    tracksFactory.removeTrack($scope.playlist.id, track.id)
 
   $scope.nextVideo = (allowRepeat = true) ->
     videos = if $scope.shuffle then $scope.shuffledTracks else $scope.tracks
@@ -80,17 +76,22 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
     pubnubConnect()
     getPlaylist(true)
     $scope.player = p
-    bindKeys()
 
   pubnubConnect = ->
-    $scope.pubnub_client.subscribe {
-      'channel': "playlist-#{$scope.playlist.id}"
+    $scope.pubnub_client.subscribe
+      'channel': channelName()
       'message': (data) =>
-        console.log data
+        console.log(data)
         if $scope.pubnub_uuid != data.uuid
           switch data?['action']
-            when "addTrack", "removeTrack" then getPlaylist(false)
-            when "playTrack" then $scope.playVideo()
+            when "addTrack" then getPlaylist(false)
+            when "removeTrack" then removeTrack(data?['track'])
+            when "playTrack"
+              if data?['track']
+                $scope.setCurrentTrack(data?['track'])
+                $scope.$apply()
+              else
+                $scope.playVideo()
             when "pauseTrack" then $scope.stopVideo()
             when "nextTrack"
               $scope.nextVideo(false)
@@ -98,11 +99,17 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
             when "requestInfo"
               publishInfo()
             else console.log("Action not found.")
-    }
+
+  pubnubDisconnect = ->
+    $scope.pubnub_client.unsubscribe
+      'channel': channelName()
+
+  channelName = () ->
+    "playlist-#{$scope.playlist.id}"
 
   publishInfo = () ->
     $scope.pubnub_client.publish {
-      channel: "playlist-#{$scope.playlist.id}",
+      channel: channelName(),
       message: { 'action': 'publishInfo','state': $scope.playerState, 'trackId': $scope.currentTrack.id, 'uuid': $scope.pubnub_uuid }
     }
 
@@ -117,18 +124,14 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
         $scope.setCurrentTrack(track)
     )
 
+  removeTrack = (track) ->
+    if $scope.currentTrack.id == track.id then $scope.nextVideo()
+    getPlaylist(false)
+
   setPlayerState = (s) ->
     $scope.playerState = s
     $scope.$apply()
 
   shuffleTracks = ->
     $scope.shuffledTracks = _.shuffle($scope.tracks)
-
-  bindKeys = () ->
-    $(document).keyup (e) ->
-      code = if e.keyCode then e.keyCode else e.which
-      if code == 39 # right arrow
-        if not $(e.target).is('input')
-          $scope.nextVideo(false)
-          $scope.$apply()
 ])

@@ -32,6 +32,6 @@ class Api::V1::TracksController < Api::ApiController
   private
 
   def playlist
-    Playlist.find_by_id(params[:playlist]) || Playlist.new(:name => "Random Playlist")
+    Playlist.find_by_id(params[:playlist_id]) || Playlist.new(:name => "Random Playlist")
   end
 end

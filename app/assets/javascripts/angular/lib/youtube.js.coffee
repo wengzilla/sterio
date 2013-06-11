@@ -21,8 +21,7 @@ class window.YouTube
 
   _wireup: (p) ->
     @video_player = p
-    @_bindKeys()
-    $(window).trigger("videoReady")
+    $(window).trigger("videoReady", @video_player)
 
   _stateChange: (e) =>
     if e.data is YT.PlayerState.ENDED
@@ -70,23 +69,3 @@ class window.YouTube
 
   videoPlayer = =>
     @video_player
-
-  _bindKeys: () =>
-    $(document).keyup (e) =>
-      code = if e.keyCode then e.keyCode else e.which
-
-      if code == 32 # spacebar
-        if not $(e.target).is('input')
-          # when spacebar is hit, the video should play/pause
-          if @video_player.getPlayerState() == YT.PlayerState.PAUSED then @video_player.playVideo()
-          else if @video_player.getPlayerState() == YT.PlayerState.PLAYING then @video_player.pauseVideo()
-
-    $(document).keydown (e) => # pressing and holding keys will fire this multiple times.
-      code = if e.keyCode then e.keyCode else e.which
-      if code == 38 # up arrow
-        if not $(e.target).is('input')
-          @video_player.setVolume(@video_player.getVolume() + 10)
-
-      if code == 40 # down arrow
-        if not $(e.target).is('input')
-          @video_player.setVolume(@video_player.getVolume() - 10)

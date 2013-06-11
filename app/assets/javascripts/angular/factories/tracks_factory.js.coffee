@@ -1,31 +1,21 @@
 App.factory("tracksFactory", ['$http', ($http) ->
   factory = {}
 
-  factory.createTrack = (playlist, external_id) ->
+  factory.createTrack = (playlist_id, external_id) ->
     promise = $http({
       method: 'POST',
       url: 'api/v1/tracks',
-      data: { external_id: external_id, playlist: playlist }
+      data: { external_id: external_id, playlist_id: playlist_id }
     }).success((data) -> 
       data
     )
     promise
 
-  factory.getTracks = (playlist) ->
-    promise = $http({
-      method: 'GET',
-      url: 'api/v1/tracks',
-      params: {playlist: playlist}
-    }).success((data) -> 
-      data
-    )
-    promise
-
-  factory.removeTrack = (playlist, id) ->
+  factory.removeTrack = (playlist_id, id) ->
     promise = $.ajax(
       url: "api/v1/tracks/#{id}",
       type: "POST",
-      data: { playlist: playlist, '_method': 'DELETE' },
+      data: { playlist_id: playlist_id, '_method': 'DELETE' },
       success: (data) =>
         data
     )
