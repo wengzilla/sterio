@@ -19,7 +19,6 @@ App.controller("PlaylistsController", ['$scope', 'playlistsFactory', 'tracksFact
       'connect': () =>
         getCurrentTrack()
       'message': (data) =>
-        console.log data
         if $scope.pubnub_uuid != data.uuid
           switch data?['action']
             when "addTrack", "removeTrack" then getPlaylist(false)
@@ -27,7 +26,7 @@ App.controller("PlaylistsController", ['$scope', 'playlistsFactory', 'tracksFact
               $scope.currentTrack = _.findWhere($scope.tracks, {id: data?['trackId']})
               $scope.currentTracks = [$scope.currentTrack]
               $scope.$apply()
-            else console.log("Action not found.")
+            else console.log("PlaylistsController action not found: #{data['action']}")
 
   pubnubDisconnect = ->
     $scope.pubnub_client.unsubscribe

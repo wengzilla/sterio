@@ -80,7 +80,6 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
     $scope.pubnub_client.subscribe
       'channel': channelName()
       'message': (data) =>
-        console.log(data)
         if $scope.pubnub_uuid != data.uuid
           switch data?['action']
             when "addTrack" then getPlaylist(false)
@@ -97,7 +96,7 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
               $scope.$apply()
             when "requestInfo"
               publishInfo()
-            else console.log("Action not found.")
+            else console.log("PlayersController action not found: #{data['action']}")
 
   pubnubDisconnect = ->
     $scope.pubnub_client.unsubscribe

@@ -20,7 +20,6 @@ App.factory("searchesFactory", ['$http', ($http) ->
     $http.jsonp(url)
 
   factory.formatYouTubeResults = (results) ->
-    console.log results
     formattedResults = []
     for result in results
       formattedResults.push({

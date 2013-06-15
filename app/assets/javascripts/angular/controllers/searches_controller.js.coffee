@@ -36,7 +36,6 @@ App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactor
 
   $scope.getNextPage = () ->
     $scope.current_page += 1
-    console.log $scope.current_page
     $scope.search($scope.query, $scope.current_page)
 
   init = () ->
