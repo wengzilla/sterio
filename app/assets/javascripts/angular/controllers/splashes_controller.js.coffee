@@ -1,5 +1,5 @@
 App.controller("SplashesController", ['$scope', '$location', ($scope, $location) ->
-  $scope.changeView = () ->
+  $scope.navigate = (path) ->
     if $scope.playlist_id
-      $location.path("/players/#{$scope.playlist_id}")
+      $location.path("#{path}/#{$scope.playlist_id}")
 ])
