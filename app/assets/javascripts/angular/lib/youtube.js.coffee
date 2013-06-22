@@ -56,7 +56,8 @@ class window.YouTube
       },
       events: {
         'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+        'onStateChange': onPlayerStateChange,
+        'onError': onError
       }
     })
 
@@ -66,6 +67,9 @@ class window.YouTube
 
   onPlayerStateChange = (e) =>
     $(window).trigger("videoStateChange", e)
+
+  onError = (code) =>
+    $(window).trigger("error", code.data)
 
   videoPlayer = =>
     @video_player

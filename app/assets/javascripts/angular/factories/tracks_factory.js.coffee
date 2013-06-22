@@ -19,6 +19,15 @@ App.factory("tracksFactory", ['$http', ($http) ->
       success: (data) =>
         data
     )
-    
+  
+  # factory.refreshTrack = (playlist_id, id) ->
+  #   promise = $.ajax(
+  #     url: "api/v1/tracks/#{id}",
+  #     type: "PUT",
+  #     data: { playlist_id: playlist_id },
+  #     success: (data) =>
+  #       data
+  #   )
+
   factory
 ])

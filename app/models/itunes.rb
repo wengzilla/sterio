@@ -35,13 +35,14 @@ class ItunesSong
     "itunes:#{external_id}"
   end
 
-  def track_json
-    Track.search_by_title(title).to_json
+  def get_track
+    Track.search_by_title(title)
   end
 
   def save_to_redis
-    track = REDIS.get(key).presence || REDIS.set(key, track_json)
-    REDIS.expire(key, 1.week.seconds)
-    JSON.parse(track)
+    get_track.tap do |track|
+      REDIS.set(key, track.to_json)
+      REDIS.expire(key, 1.week.seconds)
+    end
   end
 end

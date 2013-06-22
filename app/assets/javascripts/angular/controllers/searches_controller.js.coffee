@@ -1,5 +1,5 @@
-App.controller("SearchesController", ['$scope', 'searchesFactory', 'tracksFactory', ($scope, searchesFactory, tracksFactory) ->
-  $scope.playlist = {'id': 1}
+App.controller("SearchesController", ['$scope', '$routeParams', 'searchesFactory', 'tracksFactory', ($scope, $routeParams, searchesFactory, tracksFactory) ->
+  $scope.playlist = {id: $routeParams.id}
   $scope.current_page = 1
   $scope.tracks = []
   $scope.showMobile = window.isMobile()

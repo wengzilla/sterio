@@ -29,6 +29,16 @@ class Api::V1::TracksController < Api::ApiController
     end
   end
 
+  # def update
+  #   track = playlist.tracks.find(params[:id])
+
+  #   if track.refresh
+  #     render :json => track, :status => 201
+  #   else
+  #     render :json => false, :status => 400
+  #   end
+  # end
+
   private
 
   def playlist

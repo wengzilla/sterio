@@ -592,32 +592,6 @@ ul.rows > li .grouped-info p strong{
 }
 
 
-/* 
-==========================
-PAGINATION
-==========================
-*/
-.pgn8-list {
-  padding: 12px;
-  @include clearfix;
-  list-style: none;
-}
-
-.pgn8-list li {
-  margin:0;
-}
-
-.pgn8-list .prev {
-  float:left;
-} 
-
-.pgn8-list .next {
-  float:right;
-}
-
-
-
-
 // ------------------
 //  GLOBAL: FORM ELEMENTS
 // ------------------
@@ -677,9 +651,7 @@ input[type=number]::-webkit-outer-spin-button {
 //   line-height: 17px;
 // }
 
-//  ls-form STYLES
-
-form.ls-form fieldset {
+form.form fieldset {
   padding: 10px 0;
   border: none;
   -webkit-margin-start: 0;
@@ -690,13 +662,13 @@ form.ls-form fieldset {
   -webkit-padding-after:0;
 }
 
-form.ls-form ul {
+form.form ul {
   list-style: none;
   margin: 0;
   padding: 0; /*Jared Removed Float ya'll*/
 }
 
-form.ls-form ul li {
+form.form ul li {
   margin: 0 6px 10px 0;
   padding: 0;
   float: left;
@@ -706,52 +678,52 @@ form.ls-form ul li {
   @include box-sizing(border-box);
 }
 
-form.ls-form ul li label {
+form.form ul li label {
   font-weight: bold;
   margin-bottom: 3px;
 }
 
-form.ls-form ul li input[type="text"],
-form.ls-form ul li input[type="email"],
-form.ls-form ul li input[type="number"],
-form.ls-form ul li input[type="password"] {
+form.form ul li input[type="text"],
+form.form ul li input[type="email"],
+form.form ul li input[type="number"],
+form.form ul li input[type="password"] {
   margin: 0;
   border: 1px solid #cccccc;
 }
 
-form.ls-form ul li.half {
+form.form ul li.half {
   width: 48%;
 }
 
-form.ls-form ul li.one-third {
+form.form ul li.one-third {
   width: 32.3%;
 }
 
-form.ls-form ul li.two-thirds {
+form.form ul li.two-thirds {
   width: 64.5%;
 }
 
-form.ls-form ul li.one-fifth {
+form.form ul li.one-fifth {
   width: 23%;
 }
 
-form.ls-form ul li.two-fifths {
+form.form ul li.two-fifths {
   width: 36.5%;
 }
 
-form.ls-form ul li.three-fifths {
+form.form ul li.three-fifths {
   width: 49.7%;
 }
 
-form.ls-form ul li.four-fifths {
+form.form ul li.four-fifths {
   width: 77.5%;
 }
 
-form.ls-form ul li.last {
+form.form ul li.last {
   margin-right: 0;
 }
 
-form.ls-form h3.form-title {
+form.form h3.form-title {
   margin: 1em 0 0;
 }
 
@@ -797,12 +769,7 @@ form.ls-form h3.form-title {
   text-align:right;
 }
 
-
-
-
-// Nathan's stuff to include into styleguide branch
-
-form.ls-form .form-errors {
+form.form .form-errors {
   line-height: 1.1;
   margin: 10px 10px -10px;
   padding: 8px 11px;
@@ -833,7 +800,7 @@ form.ls-form .form-errors {
   }
 }
 
-form.ls-form .form-error {
+form.form .form-error {
   label {
     color: $spice;
   }
@@ -846,151 +813,5 @@ form.choose-card-form {
   li.with_left,
   label.row {
     margin: 0;
-  }
-}
-
-// ------------------
-//  GLOBAL: PAGE HEADINGS
-// ------------------
-
-h1.page-heading {
-  margin: 0 0 -2px;
-  padding: 0 10px;
-  font-size: 17px;
-  line-height: 44px;
-  background: #f0f0f0;
-  color: #666;
-}
-
-/* 
-==========================
-FOOTER NAVIGATION - global
-==========================
-*/
-
-
-/* 
-==========================
-FOOTER FOR SITE - global
-==========================
-*/
-
-.site-footer {
-  text-transform: lowercase;
-  text-align: center;
-  height: 44px;
-  line-height: 44px;
-  font-size: 17px;
-}
-
-.site-footer a {
-  margin-right: 2em;
-  text-decoration: none;
-  font-size: 12px;
-  color: #aaa;
-  font-weight: bold;
-}
-
-.site-footer a:last-child {
-  margin: 0;
-}
-
-/* 
-==========================
-SHARE - Facebook | Twitter | Email
-==========================
-*/
-
-.share {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  display: table;
-}
-
-.share div {
-  display: table-cell;
-  width: 33%;
-  padding: 10px 4px;
-}
-
-.share div a {
-  display: block;
-  color: #fff;
-  border-radius: 4px;
-  height: 23px;
-  line-height: 24px;
-  padding-left: 26px;
-  font-size: 12px;
-}
-
-.share .facebook a {
-  background-color: #3c5a98;
-}
-
-.share .twitter a {
-  background-color: rgb(51, 204, 255);
-}
-
-.share .email a {
-  background-color: rgb(187, 187, 187);
-}
-
-.share a {
-  position: relative;
-}
-
-.share a span {
-  display: block;
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  top: 6px;
-  left: 6px;
-  -webkit-background-size: 100% 100% !important;
-}
-
-.share .facebook span {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJtJREFUeNpiYKAA/P//XwGI5wPx/f/YwX4GWgGg4Q3/CYP9tLK8/z9xYD8tLFf4Tzwg6AAmMtyQT00PsZChxwGH+AMgXgjEB6B8BVrFPy5gQI55jOQ4AKtBQECOA5gYBhiMOoCFiDhvILZkxJE2GihKhLgSHZHgAtABhgMZBR9GE+Ggd8BoSTjqgFEHjDpg1AGjDhh1wIA7ACDAAIO71vVzGfVXAAAAAElFTkSuQmCC);
-}
-
-.share .twitter span {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFElEQVRYw+2XXRGEMAyEkVAJSEDCSagEJCDhHFQCEiqhEioBCZXw3UuY6TD8tQTuhZ1heCLZpJtNaZoXL24C0P4jaQ8EIMnbP508RwSGmkAd4EpaCLRSNSskbCmBTxYgAP2JbwL7GEtJxEWACRgAc0BYh4Qcw1pLE/DNiZyoPoctOYa4E2gSkh1liLWKZqMbgXK0WR57RVi1SFl3nUYnahAPp2tntlWJHJHwN1U/nvGXmcSgrAdTY8+DUnJfu2i0CHxWXa/AG66I0m0FdkdrUybCXxSe2Uswir06seH56RUmIZ4SnpDQhi9SPWCVzCdV3YaEhJGVW0NkWq7rK3c8IxqY9bGFINqxT1w821mg74/HCy38AKmPYRb8pLLTAAAAAElFTkSuQmCC);
-}
-
-.share .email span {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA90lEQVRYw+2WWxGDMBBFKwEJSEBCJCAhUuIACUhAAhKQgAQknP6E4ZVnU5pOmzvDD5PdezaPTR6Pol8TUOUGmAGRE2BVlxsAYAKanACrVGyATb2tIqAChCPWPBuBxpdgbSiBAVgiilCxAOo0XmjTFG0FeQbKnXENjLxXygQg9NfszGXkNIequwAY9oi8wXhrVi4AoLnBvD+0aw/AZEgwAGq3VFXgpl6A1nsMd//bU7AMuWgs5oM11gHQe4P9+Q5VG/M4AEagT2jFB3C9XHMUwIt3waVqoLOdMhdAnfog0c1rdh1zbx9IvBmFN38B4MMqAN8HUPT3egJmPZWT3rsMfgAAAABJRU5ErkJggg==);
-}
-
-
-@media screen and (-webkit-min-device-pixel-ratio: 2) {
-  .share div a {
-    border-radius: 0px;
-    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
-  }
-  .share .facebook a {
-    background: transparent;
-    -webkit-border-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAAHfgQuIAAAFBklEQVRo3t1aS08UWRS+MSZETdSdYQytMRFF6KZpoGm7xVdUwG56QBFxYUwcZzSo7cKotK8Z36Cj+ADNxM1k4k8wbozpuJTf4ArduvG1UbxzvnPrlsR0dagrdaPVyUc6qRTnfNX3nvN9p66Id54W9HlGKH2Df3DhaWZgXJYDLpbW9t+R5cAX23b+LcuBL7b2XJXlwBebcxdkOeDio6bt52Q5CIfKtzRKUtKNXjQyu8ek8KLBVLxoMBUvGkzFiwZT8aKhqHQURYK+rO0bnRFSlEu8s6ieXnr3PekXfGOq75b0C74x2Tsi/YJvbMlfln7BNyayf0q/EHXr/hBNXWekH9Sm9r3RK2uw3OryQA2vuki0+1WyZ3jGv2NL90XwK4hU303puWQ9QOl+EiY/Pq/kSnvAC8kd16UwWTWtPdcqbywvtPx6RQqT5daMJ1tpt3ohkaOVY7JOeSNXKgFeoNUmhckCb+woVq4rXqhrP/RezJkz97nf3YGFrndHunrlhpfIPQg0bjs1RTFGeFfR5wj4Yglm9twPBrShkr3DMhLNTnLFydBGyQyMBY427ClVxu9KG2jbecNp5rtuSxtwqz+KnA24ugLP1gZa8pecxki13wa0OCq1Un20gUT2vNPBqa7agFNtoA3/kjbgyqnE9vPSBhq3DXHAFU2dZ740dZ2VQWP+ol8mxKrMflG/ucDyJhLLTca7qODOIurWH3o3b+GSF/T/q7h4o1s4HaPGMRmlWQSMzCACaehgI2ghQbUntD60QN2eClg9WLYQ5jMVfzMFNjzMQaQhO6lUZoxUJvUqFoIB9UP0WhbRkMH0ZUr1q/FAgeJNAR8LFFUbzRf9kBcStKaJlDb0Xgh4Q9rq+BwQ2t1E85tABaS2b0ticECYDBNzYmiDS2wvbGkaDgg3ZOKiTKACkrCxJaI4IGybid0znEiU2LDZUm0cEP7SxJeaQAUk6WZLJnJAOEwTA204HCrxjMeWLuWAkAAmTt8ETsCitCWEOSBGCyYjCaM5HQckNWxLeXPANesHP5rMTkxAAf8VkN82ZD7sBGwFdOkyjDP9Dnn8AoMk1qWr239H0Crof/iA2fYW8CvT5b7rLRzJX4WLCB6J5iZXtx98G+8ofgnKAnw3KDfkiFwdwzSoTdM0gkU2TnjEK1N736AO4JHDDqCR8J7t/kFBuSFH5IqckTs4gAtxWqq904oFi5dO4GmgFigNN6q0smtvHvyguM85IlfkjNzBAVzmL6qewP4Dwf/qNxU+4KKaXwbn2YLHOHMAl/pNR99zWVNTqKsyDXIB+0NbABdwcmYM6tVmegBLciwkuKfnwNMIWvK/tuC6GDUKJr/dfzdUACeXYHIH2e3+26ECOH0l2DtMXn80VAAnl6DN+YUt8ItflyA5RAxIwwTX9erjDdiUYYLrsvllTP4SHwIIE5rVyzuHYPcF3pRhAji5BBOkyrEpw4SEnlrok0LQbmGCOyXBH5vjNVtwhiSa4Fl+ox4mgJNLME5uGIPuMCGu3tc7BC2OKy2fD1AEbY5HbYFPk30lOMRnPsIEcNIEn8a2npjiKVqIEN1y/DNxe8InEiLR3GtUnTAh0pB9hcOAoq79IJNcHsu/Dnq8bQuRWB7kCmqUnjkg1mw4zOcscZilunbjy3jH0NTPRgo5I3dw0AdmmGBter9Ylf6Nf8mGzcdEbOtJfUQIY/CHs3xMKAg8dHKtmT6y1/gfBrXU46le67kAAAAASUVORK5CYII=) 10 10 10 10 stretch stretch;
-  }
-  .share .twitter a {
-    background: transparent;
-    -webkit-border-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAAHfgQuIAAAFMklEQVRo3t2a3U9cRRjGJ01Q295LtARjst2y7O45dJte+IfUcOMf4IXUGxPTYNJob6yaGHVtNzRW0VQRrIEin0ux1MoCRrOlSqOBtkA/+CiVatWWj/F9ZuYsSPZgz7D7Rpfkd8Ge7L7z5MzM+7zvjIh8/J2gv2NEagOH8CCZGF6R+cDDVGLwvsyHerj3m3syH+phzde/ynyoh056XuYDD19zem7JfAgjZaOMlJT0RT8ZicySFH4ylBQ/GUqKnwwlxU+GkuInQ0tpHBHVn13UP3Vu8V9x++YlyTcvZWhJBkW/sG//lEHRL3PgrgyK+qJ7dkEGRc+Q3lkZFLH7eL+Id92UQQgleye9mXUg3+zyoVzNuoqDb4w6ndcf6h2C2Je/QF+tcOnF+05ZHyJNo/eFzct3+xc2XwN+YNoJm1njpmc3X1h+uD0ztOgsppvTdWPz1eqH0zEthc08jbdPbr4F+BFru0pftJjgsdaJzfcVP/Z8cGFBbHt0e0PQ1YGJ7q0Ot/y5lwaxCRWDqg8zSxSjTq0q+ns22jKmJsS+kdXiMLQsne6bsuLg0azeVTMPaJUtFx0HSyMXkAH37G1v+/9LcuCm50zAC39IDtzeGZOnzv8uOXC6b5mAD7nvbxXkGJ1Q++9IDuJfTZmAfbclB/Ez1zxvOCc5iLVdMQEp5XAQax1XAXfFO6dX47T1FJudzjPNIvRet4ic+kHZm8r6hmyc8mQhqWocnt8R3d9Ev1+mNm9kC5Mxyk2RkSogKGQOIJCHF6wOKaRY6QmpDynQS0+1+BBmDg6poIsdjoQWO4qDihdez2qX+eKbo8hVyFnFyofItci5ygZXt1xeSQwtB3aoQXF1Qfi2QFLkSL57M6p2TQlYYhsrbVl7UUDKwlwZXwekmWnj+W3QAWlT5bIYJuCstClOLMtgCkg+g8vT6ICUNmyqKBtUQBgbLhOlA1IKsSn3LDsSFDBAtb5VdECqL23qUhtUQFg3LpuoA1IhbFNAWzaHKCB5RS5fqgKiYrep9G0wAa9ILiOsA7ZOSJuWhFWfTgccl1zOWwWs+iizaNM7sYECHhaw3xw2H+UEygr40ifQzgza5AkKGknKl+5O9SNoGfw/6oBC1xaoV9bb/VxtYSx/GR5uD7tNFXVHs6G3WucijcOrxSoBtgyNDWPEWDFm028u21DLjKjCadsjjzU8feSTSfpfRk59L6ubLspo848y+sWYjJ6+/N8EY6MxYqwYM8YODdBCmh73aqddO6P7m+nharT5J+l0TKnMlSBTB6+8j6qCorX8tgqqFnh6GqvuHE9JaICWHVWJz7H+IPDV8PG+O07nNPm4e/Ql1Gwr/09QMZEGaAkfSy+obQ2baZyUw6RylGwsZSFpgSbTY9DnVjg5VEVwKUBacm7mHwJLiJw/1AL56m3mTr4RyFjfc6HOG3MCGfsJzEcjRiBjO4H5KMYIZGxfcOH2rBPI2S5hPtsyAsnu1wz8VlI4+lzbCOy8IWvO3S0poGlNYMd1MquLJQU05QTGO6bVOUIpAU1rAhn7eczHy0Zg+zVlbUoJaFoTeOaqsjalBDTlBHK2K5nvBxiBjO1RLtRtsjWB4/ThTElhLlwogcno6Z9XuPrNXERbxh6QtnfUjYSnDqUuwbuVEpUvvz+Ky4Ai3DCgRR4+eYmlp85A5SsnIK5Wt9KTabHnZEbds8RlliefPzIYa59cKnYvv9BgzBg7NHgXZpTA0LtdIpTsEeET50Xk06yItk14V4TQBq8v8DWhYlBvxlq+vmXv8Tccye1P6nFIxQAAAABJRU5ErkJggg==) 10 10 10 10 stretch stretch;
-  }
-  .share .email a {
-    background: transparent;
-    -webkit-border-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAAHfgQuIAAAEoElEQVRo3t1ay07bQBSdTfiERhVLBIhVv4aIFTtYoURiR8WiSogEiUBRwRQnvN958H7zA6wRfAHbVlRdtgimc649FiA7xYN924J0Nhhz7xnPzD3nzojp6Wmhfr4o2M/wEQ+ss7Mz6Qc8tI+Pj6Uf6OH+/r70Az3c2tqSfqCH1WpV+gEPc+vr69IPwqXynIYtpXoxiMbp6akUQTSIShANohJEg6gE0SAqQTSIimVZolwuy93dXbm3t/dHIJyi74weKIUFvXh4eCjDgl5EmmFBL9brdRkW9OLm5qYMCzE2NibW1tZkGOTz+Rs9s7r9ZlcAkjTr+vv7rxD6Jd8QWFxcBL8egREKmrJBUBPmpzD5+Ds7O83XQBBolpvMGvqOzRZWEGjpmEy3jY2N5qs1CKurq1KYzNPl5eXmW0AQaBKYTPCFhYXm+0oQxsfHb0VLS0sl7OrARNer40MqlbrAJhQHJicn71SMNK0q9ZOan5+XBwcH8vz8PBZgQeFj9PX1XdKOc3JyIk0WV1h4WxwCcmB7e9sJeHR0JDnQaDScgPh+HKjVak7Al27DrwVVGwTE2HLAXYvCxthyYGVlxQmIseXA0tKSeeU33kwREJWDA9jRELBVje1D2I3YBF1dXXUxMjIipqamSN5kMplLlLsoUSqVvnV0dFTV/0/Q5o1q4VaMpGsy7AgBI9ONQBo6WBolJK7yhNKHEqjLUw9+iToOBRHlzgIpg9kJc4DS5KlM1CrUrLjqIfZRd4Z2i7m5uXvUqrAKNSxcn1Ai/cVRfF3vagtIYo6ArveyBXZxropPATEzTTS/CSggygaXxKCAmDQm5sTQBtsCdYpL01BALHoTF2UCChjGy74WFBCF0cTuGXYkbOoPcKk2CogiaeJLTUABId24ZCIFhBE2MdCGzSFbQCty6VIKiEpv4vRNQAEhTrmE8N8JCK3BpbwpoBKqP0x6JyZQAT8JyG8OmQ87AVsBXfoe7cy4A6KRRLp0dHQUQRPQ//ABUXsL+JXHct/zFq7kT+BhW1tbFUo5m81+tSzrIS4L8FogN+SIXJGz229O+HmZJIZ4aGjoBi/OzMzISqUilSgnhY6l+i8CuSFH5IqckTs4gIvi9E57p9bOzs46RgN/jNWC2gwVqR1HXBYnipahNhHIGbmDA7i0t7fXsP5AMFssFr9j34GO47BRcQG5gwO4FAqFW9rWdMsEMvx/JfYc4OIVCt3X42oIcwBcPIH4mOBbgie59fkzl/3lwpMvyGm3mU8ObO/smMvec8GzMLq1ztVOYD6Ksb1rHlztCy54Fk2fVXC1S5jPtmyv0HO1Z7jwpNBDw6EX/JbgOlCHIGe/i/k01CHI2V/jAt1J0QQ5+3nMx8sOQc7+IRfocpAmyNmvZD6vdwhy9ke54F7VcwhytkeZL0A4BDnbscwXLoigNTs7e8/V/uVCuVz+pbh9phsJ6XT6+q0RHBgYuMJlQFEoFIjk4ODgNUdPnQOZTAbkeqgvms/nxcTEBN2zxGWW3t7eC7XF3kXdUo8byBm5g4O+MEMEc7kc3UUqFot0+10tTn1FCG3w4YivCcWBYTfX5OOWvcZv8nrDXr7TVvYAAAAASUVORK5CYII=) 10 10 10 10 stretch stretch;
-  }
-  .share a span {
-    top: 4px;
-  }
-  .share .facebook span {
-    top: 3px;
-  }
-  .share .twitter span {
-    top: 3px;
-  }
-  .share .email span {
-    top: 3px;
   }
 }

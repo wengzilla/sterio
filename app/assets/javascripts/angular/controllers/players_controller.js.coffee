@@ -1,6 +1,6 @@
-App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactory', ($scope, playlistsFactory, tracksFactory) ->
+App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory', 'tracksFactory', ($scope, $routeParams, playlistsFactory, tracksFactory) ->
   $scope.tracks = []
-  $scope.playlist = {id: 1}
+  $scope.playlist = {id: $routeParams.id || 1}
   $scope.shuffle = true
   $scope.sync    = true
   $scope.repeat = true
@@ -20,6 +20,7 @@ App.controller("PlayersController", ['$scope', 'playlistsFactory', 'tracksFactor
 
   $(window).bind("videoReady", (e, p) => initPlayer(p))
   $(window).bind("playerStateChange", (e, s) => setPlayerState(s))
+  $(window).bind("error", (e, p) => $scope.nextVideo(false); $scope.$apply())
 
   $scope.$on '$destroy', () -> 
     $(window).unbind("videoReady")

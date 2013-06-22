@@ -1,0 +1,66 @@
+<link href='http://fonts.googleapis.com/css?family=Six+Caps' rel='stylesheet' type='text/css'>
+
+<div class="wrapper" ng-controller="SplashesController">
+  <i class="icon-rocket active"></i>
+  <form class="form">
+    <div class="input-prepend">
+      <input type="text" ng-model="playlist_id" placeholder="launch code"/>
+    </div>
+    <input type="submit" ng-click="changeView()" class="btn btn-flat" value="start the party">
+  </form>
+</div>
+
+<style>
+.input-prepend {
+  text-align: center;
+}
+.input-prepend input[type="text"] {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  border-radius: 5px;
+  text-align:center;
+  font-size: 20px;
+}
+
+input[type="submit"] {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  border-radius: 5px;
+  text-align:center;
+  font-size: 20px;
+  margin-top: 10px;
+  background-color: purple;
+}
+
+.input-prepend .label {
+  float: left;
+  margin-top: 15px;
+  margin-left: 20px;
+  margin-right: -120px;
+  font-family: 'Raleway';
+  font-size:20px;
+}
+
+.title {
+  font-family:'Six Caps';
+  line-height: 100px;
+}
+
+.wrapper {
+  text-align: center;
+}
+
+.icon-rocket {
+  line-height: 200px;
+  font-size: 100px;
+  color: #AD61B9;
+}
+</style>
+
+<script type="text/javascript">
+  $(window).resize(function(){
+      $('.title').css('font-size',($(window).width()*0.20)+'px');
+  });
+</script>

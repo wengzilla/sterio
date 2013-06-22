@@ -10,5 +10,15 @@ App.factory("playlistsFactory", ['$http', ($http) ->
     )
     promise
 
+  factory.createPlaylist = (params) ->
+    promise = $http({
+      method: 'POST',
+      url: 'api/v1/playlists/'
+      data: params,
+    }).success((data) -> 
+      data
+    )
+    promise
+
   factory
 ])

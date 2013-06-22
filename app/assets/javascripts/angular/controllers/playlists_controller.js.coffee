@@ -1,5 +1,5 @@
-App.controller("PlaylistsController", ['$scope', 'playlistsFactory', 'tracksFactory', ($scope, playlistsFactory, tracksFactory) ->
-  $scope.playlist = {id: 1}
+App.controller("PlaylistsController", ['$scope', '$routeParams', 'playlistsFactory', 'tracksFactory', ($scope, $routeParams, playlistsFactory, tracksFactory) ->
+  $scope.playlist = {id: $routeParams.id}
   $scope.pubKey='pub-b0ec0cb4-6582-4e85-9c9e-1eae9873461a'
   $scope.subKey='sub-7c99adeb-fb9b-11e0-8d34-3773e0dc0c14'
   $scope.showMobile = window.isMobile()

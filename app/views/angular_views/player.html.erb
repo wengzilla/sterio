@@ -9,7 +9,7 @@
       </div>
       <div class="video-command-bar">
         <ul>
-          <li ng-class='{"active":shuffle}' ng-click="shuffle = !shuffle"><i class="icon-random"></i></li><li ng-class='{"active":sync}' ng-click="sync = !sync"><i class="icon-rocket"></i></li><li ng-class='{"active":repeat}' ng-click="repeat = !repeat"><i class="icon-refresh"></i></li><li ng-click="showPlaylist = !showPlaylist"><i ng-class='{"icon-list":!showPlaylist, "icon-search":showPlaylist}'></i></li>
+          <li ng-class='{"active":sync}' ng-click="sync = !sync"><i class="icon-rocket"></i></li><li ng-class='{"active":shuffle}' ng-click="shuffle = !shuffle"><i class="icon-random"></i></li><li ng-class='{"active":repeat}' ng-click="repeat = !repeat"><i class="icon-refresh"></i></li><li ng-click="showPlaylist = !showPlaylist"><i ng-class='{"icon-list":!showPlaylist, "icon-search":showPlaylist}'></i></li>
         </ul>
       </div>
       <div ng-show="!showPlaylist" ng-include src="'partials/search.html'">
