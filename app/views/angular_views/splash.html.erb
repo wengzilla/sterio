@@ -1,24 +1,21 @@
 <link href='http://fonts.googleapis.com/css?family=Six+Caps' rel='stylesheet' type='text/css'>
 
 <div class="wrapper" ng-controller="SplashesController">
-  <i class="icon-rocket active"></i>
+  <div class="icon"><i class="icon-rocket"></i></div>
+  <div class="title">ster.io</div>
   <form class="form">
     <div class="input-prepend">
       <input type="text" ng-model="playlist_id" placeholder="launch code"/>
     </div>
-    <input type="submit" ng-click="navigate('/players')" class="btn btn-flat" value="start the party">
+    <input type="submit" ng-click="navigate('/playlists')" class="flat-btn" value="lift off">
   </form>
 </div>
 
 <style>
-.input-prepend {
-  text-align: center;
-}
-.input-prepend input[type="text"] {
+input[type="text"] {
   display: block;
   margin: 0 auto;
   width: 90%;
-  border-radius: 5px;
   text-align:center;
   font-size: 20px;
 }
@@ -27,34 +24,40 @@ input[type="submit"] {
   display: block;
   margin: 0 auto;
   width: 90%;
-  border-radius: 5px;
   text-align:center;
   font-size: 20px;
   margin-top: 10px;
-  background-color: purple;
 }
 
-.input-prepend .label {
-  float: left;
-  margin-top: 15px;
-  margin-left: 20px;
-  margin-right: -120px;
+.flat-btn {
+  background-color: #342138;
+  color: white;
   font-family: 'Raleway';
-  font-size:20px;
-}
-
-.title {
-  font-family:'Six Caps';
-  line-height: 100px;
+  border: 0px;
+  padding: 10px;
 }
 
 .wrapper {
+  font-family:'Raleway';
   text-align: center;
 }
 
+.title {
+  font-size: 70px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-weight: 100;
+  line-height: 70px;
+  color: white;
+}
+
+.icon {
+  padding-top: 30px;
+}
+
 .icon-rocket {
-  line-height: 200px;
-  font-size: 100px;
+  line-height: 80px;
+  font-size: 80px;
   color: #AD61B9;
 }
 </style>
