@@ -1,16 +1,24 @@
 App.controller("PlaylistsController", ['$scope', '$routeParams', 'playlistsFactory', 'tracksFactory', ($scope, $routeParams, playlistsFactory, tracksFactory) ->
-  $scope.playlist = {id: $routeParams.id}
   $scope.pubKey='pub-b0ec0cb4-6582-4e85-9c9e-1eae9873461a'
   $scope.subKey='sub-7c99adeb-fb9b-11e0-8d34-3773e0dc0c14'
   $scope.showMobile = window.isMobile()
   $scope.pubnub_uuid = PUBNUB.uuid()
+  $scope.playlistId = $routeParams.id
+  $scope.playlist = playlistsFactory.playlist()
+  $scope.tracks = playlistsFactory.tracks()
+  $scope.playerState = "PAUSED"
+
+  # $scope.$watch 'playlist', (o, n) ->
+  #   console.log o
+  #   console.log n
+  # , true
 
   $scope.$on '$destroy', () -> 
     pubnubDisconnect()
 
   init = () ->
     pubnubConnect()
-    getPlaylist()
+    getPlaylist() if _.isEmpty($scope.playlist)
 
   pubnubConnect = ->
     $scope.pubnub_client = PUBNUB.init({publish_key: $scope.pubKey , subscribe_key: $scope.subKey});
@@ -23,8 +31,9 @@ App.controller("PlaylistsController", ['$scope', '$routeParams', 'playlistsFacto
           switch data?['action']
             when "addTrack", "removeTrack" then getPlaylist(false)
             when "playTrack", "publishInfo"
+              console.log data
               $scope.currentTrack = _.findWhere($scope.tracks, {id: data?['trackId']})
-              $scope.currentTracks = [$scope.currentTrack]
+              $scope.playerState = data?['state']
               $scope.$apply()
             else console.log("PlaylistsController action not found: #{data['action']}")
 
@@ -33,8 +42,7 @@ App.controller("PlaylistsController", ['$scope', '$routeParams', 'playlistsFacto
       'channel': channelName()
 
   channelName = () ->
-    "playlist-#{$scope.playlist.id}"
-
+    "playlist-#{$scope.playlistId}"
 
   getCurrentTrack = () ->
     $scope.pubnub_client.publish
@@ -42,9 +50,7 @@ App.controller("PlaylistsController", ['$scope', '$routeParams', 'playlistsFacto
       message: { 'action': 'requestInfo', 'uuid': $scope.pubnub_uuid }
 
   getPlaylist = () ->
-    playlistsFactory.getPlaylist($scope.playlist.id).then((response) ->
-      $scope.tracks = response.data.tracks
-    )
+    playlistsFactory.getPlaylist($scope.playlistId)
 
   $scope.sendAction = (action, track = null) ->
     $scope.pubnub_client.publish
@@ -61,6 +67,10 @@ App.controller("PlaylistsController", ['$scope', '$routeParams', 'playlistsFacto
 
   $scope.showCurrentVideo = () ->
     $scope.currentTrack && $scope.showMobile
+
+  $scope.showPlayControl = () ->
+    console.log $scope.playerState
+    _.include(['PAUSED', 'CUED', 'BUFFERING'], $scope.playerState)
 
   init()
 ])

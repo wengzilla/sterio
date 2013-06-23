@@ -8,13 +8,13 @@
           <p class="title"><span class="rating">{{currentTrack.rating | number: 0}}%</span> {{currentTrack.view_count | commaDelimitedNumber}} views</p>
         </div>
         <ul>
-          <li ng-click="sendAction('playTrack')"><i class="icon-play"></i></li><li ng-click="sendAction('pauseTrack')"><i class="icon-pause"></i></li><li ng-click="sendAction('nextTrack')"><i class="icon-step-forward"></i></li>
+          <li ng-click="sendAction('playTrack')" ng-class='{"first":showPlayControl()}' ng-show="showPlayControl()"><i class="icon-play"></i></li><li ng-click="sendAction('pauseTrack')" ng-class='{"first":!showPlayControl()}' ng-show="!showPlayControl()"><i class="icon-pause"></i></li><li ng-click="sendAction('nextTrack')"><i class="icon-step-forward"></i></li>
         </ul>
     </div>
   </div>
   <div class="video-list flush">
     <ul>
-      <li ng-repeat="track in tracks" ng-class='{"current-track":currentTrack.id==track.id}' ng-click="sendAction('playTrack', track)">
+      <li ng-repeat="track in playlist.tracks" ng-class='{"current-track":currentTrack.id == track.id}' ng-click="sendAction('playTrack', track)">
         <span class="crop">
           <img ng-src="{{track.thumbnail_url}}">
           </p>

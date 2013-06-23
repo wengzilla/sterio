@@ -1,11 +1,12 @@
 App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory', 'tracksFactory', ($scope, $routeParams, playlistsFactory, tracksFactory) ->
-  $scope.tracks = []
-  $scope.playlist = {id: $routeParams.id || 1}
+  $scope.playlist = playlistsFactory.playlist()
+  $scope.tracks = playlistsFactory.tracks()
   $scope.shuffle = true
   $scope.sync    = true
   $scope.repeat = true
   $scope.showPlaylist = true
 
+  $scope.initialized = false # YouTube firing duplicate onPlayerReady events... Bug?
   $scope.shuffledTracks = [] # keeps a list of shuffled tracks
 
   $scope.playerState = ""
@@ -13,6 +14,7 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
   $scope.subKey='sub-7c99adeb-fb9b-11e0-8d34-3773e0dc0c14'
   $scope.pubnub_client = PUBNUB.init({publish_key: $scope.pubKey , subscribe_key: $scope.subKey});
   $scope.pubnub_uuid = PUBNUB.uuid()
+  $scope.playlistId = $routeParams.id
 
   yt = new YouTube
 
@@ -29,7 +31,9 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
 
   # ========= WATCHERS =========
 
-  $scope.$watch 'tracks', (o, n) -> shuffleTracks() if $scope.shuffle && o != n
+  $scope.$watch 'playlist', (n, o) ->
+    shuffleTracks() if $scope.shuffle && o != n
+  , true
   $scope.$watch 'shuffle', () -> shuffleTracks() if $scope.shuffle
   $scope.$watch 'sync', () -> console.log("sync on") if $scope.sync
 
@@ -40,10 +44,6 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
   $scope.$watch 'currentTrack', ->
     if $scope.currentTrack?
       $scope.playVideo($scope.currentTrack)
-      $scope.pubnub_client.publish {
-        channel: channelName(),
-        message: { 'action':'playTrack', 'trackId': $scope.currentTrack.id, 'uuid': $scope.pubnub_uuid }
-      }
 
   # ========= SCOPE METHODS =========
 
@@ -52,6 +52,9 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
 
   $scope.playVideo = (track=null) ->
     $(window).trigger("playVideo", track?.external_id)
+
+  $scope.pauseVideo = ->
+    $(window).trigger("pauseVideo")
 
   $scope.stopVideo = ->
     $(window).trigger("stopVideo")
@@ -73,9 +76,11 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
     $scope.setCurrentTrack(videos[index])
 
   initPlayer = (p) ->
-    pubnubConnect()
-    getPlaylist(true)
-    $scope.player = p
+    if $scope.initialized == false
+      pubnubConnect()
+      if _.isEmpty($scope.playlist) then getPlaylist() else playTrack()
+      $scope.player = p
+      $scope.initialized = true
 
   pubnubConnect = ->
     $scope.pubnub_client.subscribe
@@ -83,7 +88,7 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
       'message': (data) =>
         if $scope.pubnub_uuid != data.uuid
           switch data?['action']
-            when "addTrack" then getPlaylist(false)
+            when "addTrack" then getPlaylist()
             when "removeTrack" then removeTrack(data?['track'])
             when "playTrack"
               if data?['track']
@@ -91,7 +96,7 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
                 $scope.$apply()
               else
                 $scope.playVideo()
-            when "pauseTrack" then $scope.stopVideo()
+            when "pauseTrack" then $scope.pauseVideo()
             when "nextTrack"
               $scope.nextVideo(false)
               $scope.$apply()
@@ -104,7 +109,7 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
       'channel': channelName()
 
   channelName = () ->
-    "playlist-#{$scope.playlist.id}"
+    "playlist-#{$scope.playlistId}"
 
   publishInfo = () ->
     $scope.pubnub_client.publish {
@@ -112,24 +117,24 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
       message: { 'action': 'publishInfo','state': $scope.playerState, 'trackId': $scope.currentTrack.id, 'uuid': $scope.pubnub_uuid }
     }
 
-  getPlaylist = (setCurrentTrack = true) ->
-    playlistsFactory.getPlaylist($scope.playlist.id).then((response) ->
-      $scope.playlist = response.data
-      $scope.tracks = $scope.playlist.tracks
+  getPlaylist = () ->
+    playlistsFactory.getPlaylist($scope.playlistId).then(() -> playTrack())
 
-      if setCurrentTrack
-        index = if $scope.shuffle then _.first(_.shuffle([0...$scope.tracks.length])) else 0
-        track = response.data.tracks[index]
-        $scope.setCurrentTrack(track)
-    )
+  playTrack = () ->
+    if !$scope.currentTrack? && $scope.tracks
+      index = if $scope.shuffle then _.first(_.shuffle([0...$scope.tracks.length])) else 0
+      track = $scope.tracks[index]
+      $scope.setCurrentTrack(track)
 
   removeTrack = (track) ->
     if $scope.currentTrack.id == track.id then $scope.nextVideo()
-    getPlaylist(false)
+    getPlaylist()
 
   setPlayerState = (s) ->
     $scope.playerState = s
+    console.log s
     $scope.$apply()
+    publishInfo()
 
   shuffleTracks = ->
     $scope.shuffledTracks = _.shuffle($scope.tracks)

@@ -17,6 +17,7 @@ class window.YouTube
     $(window).bind("playerReady", (e, p) => @_wireup(p))
     $(window).bind("videoStateChange", (e, p) => @_stateChange(p))
     $(window).bind("playVideo", (e, t) => @_playVideo(t))
+    $(window).bind("pauseVideo", (e, t) => @_pauseVideo(t))
     $(window).bind("stopVideo", (e, t) => @_stopVideo(t))
 
   _wireup: (p) ->
@@ -38,6 +39,9 @@ class window.YouTube
   _playVideo: (t) =>
     if t? then @video_player.loadVideoById(t)
     @video_player.playVideo()
+
+  _pauseVideo: =>
+    @video_player.pauseVideo()
 
   _stopVideo: =>
     @video_player.stopVideo()

@@ -80,7 +80,7 @@ LIST PAGES
   min-height: 55px;
 }
 
-.video-list ul li h3, .current-video h3 {
+.video-list ul li h3 {
   margin-top: 0;
   padding: 10px 30px 4px 10px;
   color: #dfdfdf;
@@ -90,7 +90,26 @@ LIST PAGES
   line-height: 16px;
 }
 
-.video-list ul li p, .current-video p {
+.current-video h3 {
+  margin-top: 0;
+  padding: 10px 0 5px 0;
+  color: #dfdfdf;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 16px;
+}
+
+.current-video p {
+  color: $gray-50;
+  font-weight: normal;
+  padding: 0 10px 0 10px;
+  font-size: 12px;
+  line-height:12px;
+  margin: 0 0 4px;
+}
+
+.video-list ul li p {
   color: $gray-50;
   font-weight: normal;
   padding: 0 30px 0 10px;
@@ -404,7 +423,7 @@ LIST PAGES
     background-color: transparent;
   }
 
-  li:first-child {
+  li.first {
     border-left: 0;
   }
   li:last-child {
