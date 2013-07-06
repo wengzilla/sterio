@@ -1,5 +1,10 @@
 App.controller("SplashesController", ['$scope', '$location', ($scope, $location) ->
-  $scope.navigate = (path) ->
+  $scope.showMobile = window.isMobile()
+
+  $scope.navigate = () ->
     if $scope.playlist_id
-      $location.path("#{path}/#{$scope.playlist_id}")
+      if $scope.showMobile
+        $location.path("playlists/#{$scope.playlist_id}")
+      else
+        $location.path("players/#{$scope.playlist_id}")
 ])
