@@ -50,3 +50,5 @@ gem 'uniquify'
 # storing the top itunes songs
 gem 'httparty'
 gem 'redis'
+
+gem 'debugger'

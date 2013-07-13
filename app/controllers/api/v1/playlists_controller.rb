@@ -20,6 +20,6 @@ class Api::V1::PlaylistsController < Api::ApiController
   private
 
   def playlist
-    @playlist ||= Playlist.find_by_id(params[:id])
+    @playlist ||= (Playlist.find_by_id(params[:id]) || Playlist.where("lower(token) = ?", params[:id].downcase).first)
   end
 end

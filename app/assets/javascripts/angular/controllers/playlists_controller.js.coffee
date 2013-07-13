@@ -69,7 +69,6 @@ App.controller("PlaylistsController", ['$scope', '$routeParams', 'playlistsFacto
     $scope.currentTrack && $scope.showMobile
 
   $scope.showPlayControl = () ->
-    console.log $scope.playerState
     _.include(['PAUSED', 'CUED', 'BUFFERING'], $scope.playerState)
 
   init()

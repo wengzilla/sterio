@@ -114,7 +114,8 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
   publishInfo = () ->
     $scope.pubnub_client.publish {
       channel: channelName(),
-      message: { 'action': 'publishInfo','state': $scope.playerState, 'trackId': $scope.currentTrack.id, 'uuid': $scope.pubnub_uuid }
+      message: { 'action': 'publishInfo','state': $scope.playerState, 
+      'trackId': $scope.currentTrack?.id, 'uuid': $scope.pubnub_uuid }
     }
 
   getPlaylist = () ->
@@ -132,7 +133,6 @@ App.controller("PlayersController", ['$scope', '$routeParams', 'playlistsFactory
 
   setPlayerState = (s) ->
     $scope.playerState = s
-    console.log s
     $scope.$apply()
     publishInfo()
 
